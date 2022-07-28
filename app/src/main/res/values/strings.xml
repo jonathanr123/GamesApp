@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GamesApp</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="content_description">Image</string>
+    <string name="tv_title_section_games">Mas Populares</string>
 </resources>
