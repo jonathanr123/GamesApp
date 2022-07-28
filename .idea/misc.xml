@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/activity_main.xml" value="0.17239583333333333" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/ic_home.xml" value="0.1765" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/menu/navigation.xml" value="0.18541666666666667" />
       </map>
     </option>
   </component>
