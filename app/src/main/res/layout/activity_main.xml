@@ -33,6 +33,13 @@
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:labelVisibilityMode="selected"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:background="@color/blue_700"
+        app:itemIconTint="#0567f5"
+        app:itemTextColor="#0567f5"
+        android:paddingVertical="8dp"
+        app:itemIconSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation"
         tools:ignore="MissingConstraints" />

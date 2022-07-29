@@ -10,9 +10,9 @@
         android:id="@+id/tv_title_section_games"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/asap_semibold"
+        android:fontFamily="@font/mazzardl_semibold"
         android:text="@string/tv_title_section_games"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="30sp"
         android:layout_marginStart="8dp"
         app:layout_constraintTop_toTopOf="parent" />

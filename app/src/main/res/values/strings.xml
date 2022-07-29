@@ -5,4 +5,6 @@
     <string name="menu_favorites">Favorites</string>
     <string name="content_description">Image</string>
     <string name="tv_title_section_games">Mas Populares</string>
+    <string name="tv_title_section_header">Welcome</string>
+    <string name="tv_subtitle_section_header">Jonathan!</string>
 </resources>
