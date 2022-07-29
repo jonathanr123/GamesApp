@@ -2,28 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ly_section_games"
+    android:id="@+id/ly_section_genres"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv_title_section_games"
+        android:id="@+id/tv_title_section_genres"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/mazzardl_semibold"
-        android:text="@string/tv_title_section_games"
+        android:text="@string/tv_title_section_genres"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:layout_marginStart="8dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_games"
+        android:id="@+id/rv_genres"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"
-        tools:listitem="@layout/item_games_list"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_section_games"/>
+        tools:listitem="@layout/item_genres_list"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_section_genres"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

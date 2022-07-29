@@ -7,4 +7,7 @@
     <string name="tv_title_section_games">Mas Populares</string>
     <string name="tv_title_section_header">Welcome</string>
     <string name="tv_subtitle_section_header">Jonathan!</string>
+    <string name="tv_title_section_creators">Creators</string>
+    <string name="tv_name_creator">Jhon Doe</string>
+    <string name="tv_title_section_genres">Categories</string>
 </resources>

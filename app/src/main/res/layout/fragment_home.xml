@@ -7,30 +7,64 @@
     tools:context=".view.HomeFragment"
     android:background="@drawable/blue_gradient">
 
-    <!-- Sección Header -->
-    <include
-        android:id="@+id/section_header"
-        layout="@layout/section_header"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"/>
+        android:layout_height="match_parent"
+        tools:ignore="ScrollViewCount">
 
-    <!-- Sección Mas populares -->
-    <include
-        android:id="@+id/inc_section_games"
-        layout="@layout/section_games"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/section_header"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="80dp">
 
-    <!-- Sección Mas populares -->
-    <include
-        android:id="@+id/inc_section_recomendados"
-        layout="@layout/section_games"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/inc_section_games"/>
+            <!-- Sección Header -->
+            <include
+                android:id="@+id/section_header"
+                layout="@layout/section_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
+
+            <!-- Sección Creator -->
+            <include
+                android:id="@+id/inc_section_creators"
+                layout="@layout/section_creators"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/section_header"/>
+
+            <!-- Sección Categorias -->
+            <include
+                android:id="@+id/inc_section_genres"
+                layout="@layout/section_genres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/inc_section_creators"/>
+
+            <!-- Sección Mas populares -->
+            <include
+                android:id="@+id/inc_section_games"
+                layout="@layout/section_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/inc_section_genres"/>
+
+            <!-- Sección Mas populares -->
+            <include
+                android:id="@+id/inc_section_recomendados"
+                layout="@layout/section_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/inc_section_games"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
