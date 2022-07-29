@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="15dp"
-        app:dividerColor="@color/blue_700"
+        app:dividerColor="@color/gray"
         app:dividerInsetStart="16dp"
         app:dividerInsetEnd="16dp"
         tools:ignore="MissingConstraints"

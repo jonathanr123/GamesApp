@@ -38,6 +38,7 @@ class GenreListAdapter() : ListAdapter<Genres, RecyclerView.ViewHolder> (DiffUti
         ) {
             with(binding) {
                 ivGenres.load(value.urlImage)
+                tvNameGenre.text = value.name
 
                 cvGenres.setOnClickListener {
                     listener?.invoke(value)

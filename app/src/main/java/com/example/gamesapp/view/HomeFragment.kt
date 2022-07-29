@@ -52,10 +52,10 @@ class HomeFragment : Fragment() {
 
     private fun setUpRecyclerViewGenres() {
         val data = listOf(
-            Genres(1, "GTA","https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg"),
-            Genres(2, "GTA","https://media.rawg.io/media/games/f99/f9979698c43fd84c3ab69280576dd3af.jpg"),
-            Genres(3, "GTA","https://media.rawg.io/media/games/d1a/d1a2e99ade53494c6330a0ed945fe823.jpg"),
-            Genres(4, "GTA","https://media.rawg.io/media/games/d1e/d1e70ce3762efcfc170c6bd067d7e9e3.jpg"))
+            Genres(1, "Action","https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg"),
+            Genres(2, "Indie","https://media.rawg.io/media/games/f99/f9979698c43fd84c3ab69280576dd3af.jpg"),
+            Genres(3, "Adventure","https://media.rawg.io/media/games/d1a/d1a2e99ade53494c6330a0ed945fe823.jpg"),
+            Genres(4, "RPG","https://media.rawg.io/media/games/d1e/d1e70ce3762efcfc170c6bd067d7e9e3.jpg"))
         rvGenres = binding.incSectionGenres.rvGenres
         rvGenres.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rvGenres.adapter = adapter4

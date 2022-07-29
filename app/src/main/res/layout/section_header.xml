@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/section_header"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/gray_gradient">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -37,7 +38,7 @@
             android:fontFamily="@font/mazzardl_semibold"
             android:text="@string/tv_title_section_header"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="20sp"
             tools:textColor="@color/black" />
 
         <TextView
