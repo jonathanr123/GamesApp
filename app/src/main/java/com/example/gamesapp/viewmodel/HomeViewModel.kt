@@ -12,6 +12,7 @@ import com.example.gamesapp.utils.RawgApiResult
 import com.example.gamesapp.utils.RawgData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -47,7 +48,8 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
                 .collect { response ->
                     when (response) {
                         is RawgApiResult.Success ->
-                            _creators.postValue(RawgApiResult.success(response.data))
+                        {delay(2000)
+                            _creators.postValue(RawgApiResult.success(response.data))}
 
                         is RawgApiResult.Failure ->
                             _creators.postValue(RawgApiResult.failure(response.statusCode))
@@ -70,7 +72,8 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
                 .collect { response ->
                     when (response) {
                         is RawgApiResult.Success ->
-                            _genres.postValue(RawgApiResult.success(response.data))
+                        {delay(2000)
+                            _genres.postValue(RawgApiResult.success(response.data))}
 
                         is RawgApiResult.Failure ->
                             _genres.postValue(RawgApiResult.failure(response.statusCode))
@@ -93,7 +96,8 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
                 .collect { response ->
                     when (response) {
                         is RawgApiResult.Success ->
-                            _gamesPopular.postValue(RawgApiResult.success(response.data))
+                        {delay(2000)
+                            _gamesPopular.postValue(RawgApiResult.success(response.data))}
 
                         is RawgApiResult.Failure ->
                             _gamesPopular.postValue(RawgApiResult.failure(response.statusCode))

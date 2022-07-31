@@ -11,4 +11,5 @@
     <color name="blue_500">#0567F5</color>
     <color name="blue_700">#02125C</color>
     <color name="gray">#7E7E7E</color>
+    <color name="gray_shimmer">#C8C8C9</color>
 </resources>

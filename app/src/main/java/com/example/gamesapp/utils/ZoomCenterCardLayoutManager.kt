@@ -58,7 +58,7 @@ class ZoomRecyclerLayout: LinearLayoutManager {
             val midpoint = width / 2f
             val d0 = 0f
             val d1 = mShrinkDistance * midpoint
-            val s0 = 1f
+            val s0 = 1.05f
             val s1 = 1f - mShrinkAmount
             for (i in 0 until childCount) {
                 val child = getChildAt(i)

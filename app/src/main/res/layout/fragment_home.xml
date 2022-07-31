@@ -54,23 +54,18 @@
                 android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/inc_section_genres"/>
 
-            <!-- Sección Mas populares -->
+            <!-- include shimmer loading home -->
             <include
-                android:id="@+id/inc_section_recomendados"
-                layout="@layout/section_games"
+                android:id="@+id/progress_loader"
+                layout="@layout/view_shimmer_loading_home"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@+id/inc_section_games"/>
+                tools:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/section_header"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-    <!-- include loading spinner -->
-    <include
-        android:id="@+id/progress_loader"
-        layout="@layout/view_load_spinner"
-        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

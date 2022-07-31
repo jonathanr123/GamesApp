@@ -11,7 +11,7 @@
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/font/asap_regular.xml" value="0.215625" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_favorites.xml" value="0.18645833333333334" />
-        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_home.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_search.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/item_creator_list.xml" value="0.22" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/item_games_list.xml" value="0.25" />
@@ -21,6 +21,7 @@
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/section_genres.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/section_header.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/view_load_spinner.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/view_shimmer_loading_home.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/menu/navigation.xml" value="0.18541666666666667" />
       </map>
     </option>
