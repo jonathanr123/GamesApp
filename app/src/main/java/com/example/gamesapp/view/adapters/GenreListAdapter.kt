@@ -1,4 +1,4 @@
-package com.example.gamesapp.adapters
+package com.example.gamesapp.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.gamesapp.databinding.ItemCreatorListBinding
 import com.example.gamesapp.databinding.ItemGenresListBinding
-import com.example.gamesapp.model.Creators
 import com.example.gamesapp.model.Genres
 
 class GenreListAdapter() : ListAdapter<Genres, RecyclerView.ViewHolder> (DiffUtilCallback()) {
@@ -37,7 +35,7 @@ class GenreListAdapter() : ListAdapter<Genres, RecyclerView.ViewHolder> (DiffUti
             listener: ((Genres) -> Unit)?,
         ) {
             with(binding) {
-                ivGenres.load(value.urlImage)
+                ivGenres.load(value.imageURL)
                 tvNameGenre.text = value.name
 
                 cvGenres.setOnClickListener {

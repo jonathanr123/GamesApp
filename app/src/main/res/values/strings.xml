@@ -11,4 +11,5 @@
     <string name="tv_name_creator">Jhon Doe</string>
     <string name="tv_title_section_genres">Categories</string>
     <string name="tv_name_genre">Nombre de Categoria</string>
+    <string name="content_description_loading">Loading</string>
 </resources>

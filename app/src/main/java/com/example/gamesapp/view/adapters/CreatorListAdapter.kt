@@ -1,4 +1,4 @@
-package com.example.gamesapp.adapters
+package com.example.gamesapp.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -35,7 +35,7 @@ class CreatorListAdapter() : ListAdapter<Creators, RecyclerView.ViewHolder> (Dif
             listener: ((Creators) -> Unit)?,
         ) {
             with(binding) {
-                ivCreator.load(value.urlImage)
+                ivCreator.load(value.imageURL)
                 tvNameCreator.text = value.name
 
                 cvCreators.setOnClickListener {

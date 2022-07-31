@@ -1,4 +1,4 @@
-package com.example.gamesapp.adapters
+package com.example.gamesapp.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -35,7 +35,7 @@ class GameListAdapter() : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilC
             listener: ((Games) -> Unit)?,
         ) {
             with(binding) {
-                ivGames.load(value.urlImage)
+                ivGames.load(value.imageURL)
 
                 cvGames.setOnClickListener {
                     listener?.invoke(value)
