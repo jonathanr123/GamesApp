@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    // Properties
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var toolbar: ActionBar
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.hide()
         bottomNavView = binding.navigationView
 
+        // Set up the bottom navigation view
         bottomNavView.setOnItemSelectedListener{ itemMenu ->
             navigationFragments(itemMenu)
             true
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Set up the fragments
     private fun navigationFragments(item: MenuItem) {
         when (item.itemId) {
             // Navigation to Home fragment

@@ -44,11 +44,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
         setUpRecyclerViewCreators()
-
         setUpRecyclerViewGenres()
-
         setUpRecyclerViewGamesPopular()
-
         setUpRecyclerViewGamesTrending()
 
         return binding.root

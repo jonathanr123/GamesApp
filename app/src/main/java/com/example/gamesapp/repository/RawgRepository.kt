@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 class RawgRepository @Inject constructor(private val apiService: RawgApiService) {
 
+    // Get a list of games creators from the Rawg API
     suspend fun getListOfGameCreators(): Flow<RawgApiResult<RawgData<List<Creators>>>> = flow {
         val response = apiService.getListOfGameCreators()
         when (response.isSuccessful) {
@@ -21,6 +22,7 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
         }
     }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
 
+    // Get a list of games genres from the Rawg API
     suspend fun getListOfGenres(): Flow<RawgApiResult<RawgData<List<Genres>>>> = flow {
         val response = apiService.getListOfGenres(ordering = "id")
         when (response.isSuccessful) {
@@ -29,6 +31,7 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
         }
     }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
 
+    // Get a list of games popular from the Rawg API
     suspend fun getListOfGamePopular(): Flow<RawgApiResult<RawgData<List<Games>>>> = flow {
         val response = apiService.getListOfGames(dates = "2021-01-01,2021-12-31", ordering = "-added")
         when (response.isSuccessful) {
@@ -37,6 +40,7 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
         }
     }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
 
+    // Get a list of games trending from the Rawg API
     suspend fun getListOfGameTrending(): Flow<RawgApiResult<RawgData<List<Games>>>> = flow {
         val response = apiService.getListOfGames(dates = "2022-07-10,2023-08-10", ordering = "-added")
         when (response.isSuccessful) {

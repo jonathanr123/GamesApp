@@ -9,7 +9,7 @@ import coil.load
 import com.example.gamesapp.databinding.ItemCreatorListBinding
 import com.example.gamesapp.model.Creators
 
-class CreatorListAdapter() : ListAdapter<Creators, RecyclerView.ViewHolder> (DiffUtilCallback()) {
+class CreatorListAdapter : ListAdapter<Creators, RecyclerView.ViewHolder> (DiffUtilCallback()) {
 
     private var onItemClicked: ((Creators) -> Unit)? = null
 

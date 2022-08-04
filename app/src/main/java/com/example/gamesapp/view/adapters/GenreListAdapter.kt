@@ -9,7 +9,7 @@ import coil.load
 import com.example.gamesapp.databinding.ItemGenresListBinding
 import com.example.gamesapp.model.Genres
 
-class GenreListAdapter() : ListAdapter<Genres, RecyclerView.ViewHolder> (DiffUtilCallback()) {
+class GenreListAdapter : ListAdapter<Genres, RecyclerView.ViewHolder> (DiffUtilCallback()) {
 
     private var onItemClicked: ((Genres) -> Unit)? = null
 

@@ -1,5 +1,6 @@
 package com.example.gamesapp.utils
 
+// Wrapper class for the retrofit response
 sealed class RawgApiResult<out T> {
     data class Success<T>(val data: T?) : RawgApiResult<T>()
     data class Failure(val statusCode: Int?) : RawgApiResult<Nothing>()

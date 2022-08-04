@@ -42,6 +42,10 @@ class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCal
             with(binding) {
                 ivGames.load(value.imageURL)
 
+                /*
+                * If the list is for the top games, then imageNumber is showed and change the src of the image
+                * depending on the position of the game in the list.
+                * */
                 if (isGamesTop){
                     cvGames.setPadding(0, 8, 0, 8)
                     ivNumberTop.visibility = View.VISIBLE

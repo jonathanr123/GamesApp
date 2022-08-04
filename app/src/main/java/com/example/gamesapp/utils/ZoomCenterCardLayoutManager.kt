@@ -3,8 +3,8 @@ package com.example.gamesapp.utils
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.Math.abs
 
+// Zoom in and out the recycler view
 class ZoomRecyclerLayout: LinearLayoutManager {
 
     private val mShrinkAmount = 0.10f
@@ -35,7 +35,7 @@ class ZoomRecyclerLayout: LinearLayoutManager {
             for (i in 0 until childCount) {
                 val child = getChildAt(i)
                 val childMidpoint = (getDecoratedBottom(child!!) + getDecoratedTop(child)) / 2f
-                val d = d1.coerceAtMost(abs(midpoint - childMidpoint))
+                val d = d1.coerceAtMost(kotlin.math.abs(midpoint - childMidpoint))
                 val scale = s0 + (s1 - s0) * (d - d0) / (d1 - d0)
                 child.scaleX = scale
                 child.scaleY = scale
@@ -63,7 +63,7 @@ class ZoomRecyclerLayout: LinearLayoutManager {
             for (i in 0 until childCount) {
                 val child = getChildAt(i)
                 val childMidpoint = (getDecoratedRight(child!!) + getDecoratedLeft(child)) / 2f
-                val d = d1.coerceAtMost(abs(midpoint - childMidpoint))
+                val d = d1.coerceAtMost(kotlin.math.abs(midpoint - childMidpoint))
                 val scale = s0 + (s1 - s0) * (d - d0) / (d1 - d0)
                 child.scaleX = scale
                 child.scaleY = scale

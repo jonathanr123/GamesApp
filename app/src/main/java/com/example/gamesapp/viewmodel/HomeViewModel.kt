@@ -14,7 +14,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -22,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: RawgRepository) : ViewModel() {
 
+    // LiveData to observe the state of the response from the repository and update the UI
     private val _creators: MutableLiveData<RawgApiResult<RawgData<List<Creators>>>> =
         MutableLiveData(RawgApiResult.loading())
     val creators: LiveData<RawgApiResult<RawgData<List<Creators>>>> = _creators
@@ -45,6 +45,7 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
         fetchGamesTrending()
     }
 
+    // Fetch creators from the repository and update live data with the result
     private fun fetchCreators() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getListOfGameCreators()
@@ -69,6 +70,7 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
         }
     }
 
+    // Fetch genres from the repository and update live data with the result
     private fun fetchGenres() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getListOfGenres()
@@ -93,6 +95,7 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
         }
     }
 
+    // Fetch games popular from the repository and update live data with the result
     private fun fetchGamesPopular() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getListOfGamePopular()
@@ -117,6 +120,7 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
         }
     }
 
+    // Fetch games trending from the repository and update live data with the result
     private fun fetchGamesTrending() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getListOfGameTrending()
