@@ -15,10 +15,12 @@ class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCal
 
     private var onItemClicked: ((Games) -> Unit)? = null
     var isGamesTop: Boolean = false
+    var widthCard: Int = 180
+    var heightCard: Int = 250
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: ViewHolder = holder as ViewHolder
-        viewHolder.bind(getItem(position), onItemClicked, position, isGamesTop)
+        viewHolder.bind(getItem(position), onItemClicked, position, isGamesTop, widthCard, heightCard)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -37,11 +39,18 @@ class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCal
             value: Games,
             listener: ((Games) -> Unit)?,
             position: Int,
-            isGamesTop: Boolean
+            isGamesTop: Boolean,
+            widthCard: Int,
+            heightCard: Int
         ) {
             with(binding) {
                 ivGames.load(value.imageURL)
 
+                // Resize the card view depending the parameters received
+                cardGames.layoutParams.width =
+                    (binding.root.context.resources.displayMetrics.density * widthCard).toInt()
+                ivGames.layoutParams.height =
+                    (binding.root.context.resources.displayMetrics.density * heightCard).toInt()
                 /*
                 * If the list is for the top games, then imageNumber is showed and change the src of the image
                 * depending on the position of the game in the list.
