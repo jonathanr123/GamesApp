@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="80dp">
 
-            <!-- Sección Header -->
+            <!-- Section Header -->
             <include
                 android:id="@+id/section_header"
                 layout="@layout/section_header"
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"/>
 
-            <!-- Sección Creator -->
+            <!-- Section Creator -->
             <include
                 android:id="@+id/inc_section_creators"
                 layout="@layout/section_creators"
@@ -34,7 +34,7 @@
                 android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/section_header"/>
 
-            <!-- Sección Categorias -->
+            <!-- Section Categories -->
             <include
                 android:id="@+id/inc_section_genres"
                 layout="@layout/section_genres"
@@ -44,7 +44,7 @@
                 android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/inc_section_creators"/>
 
-            <!-- Sección Mas populares -->
+            <!-- Section Most Popular -->
             <include
                 android:id="@+id/inc_section_games"
                 layout="@layout/section_games"
@@ -53,6 +53,16 @@
                 android:layout_marginTop="15dp"
                 android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/inc_section_genres"/>
+
+            <!-- Section New and trending -->
+            <include
+                android:id="@+id/inc_section_trending"
+                layout="@layout/section_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/inc_section_games"/>
 
             <!-- include shimmer loading home -->
             <include

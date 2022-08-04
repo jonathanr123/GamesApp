@@ -34,10 +34,15 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
         MutableLiveData(RawgApiResult.loading())
     val gamesPopular: LiveData<RawgApiResult<RawgData<List<Games>>>> = _gamesPopular
 
+    private val _gamesTrending: MutableLiveData<RawgApiResult<RawgData<List<Games>>>> =
+        MutableLiveData(RawgApiResult.loading())
+    val gamesTrending: LiveData<RawgApiResult<RawgData<List<Games>>>> = _gamesTrending
+
     init {
         fetchCreators()
         fetchGenres()
         fetchGamesPopular()
+        fetchGamesTrending()
     }
 
     private fun fetchCreators() {
@@ -107,6 +112,30 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
 
                         is RawgApiResult.Loading ->
                             _gamesPopular.postValue(RawgApiResult.loading())
+                    }
+                }
+        }
+    }
+
+    private fun fetchGamesTrending() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getListOfGameTrending()
+                .catch { throwable ->
+                    _gamesTrending.postValue(RawgApiResult.errorThrowable(Exception(throwable.cause))) }
+                .collect { response ->
+                    when (response) {
+                        is RawgApiResult.Success ->
+                        {delay(2000)
+                            _gamesTrending.postValue(RawgApiResult.success(response.data))}
+
+                        is RawgApiResult.Failure ->
+                            _gamesTrending.postValue(RawgApiResult.failure(response.statusCode))
+
+                        is RawgApiResult.ErrorThrowable ->
+                            _gamesTrending.postValue(RawgApiResult.errorThrowable(response.errorThrowable))
+
+                        is RawgApiResult.Loading ->
+                            _gamesTrending.postValue(RawgApiResult.loading())
                     }
                 }
         }

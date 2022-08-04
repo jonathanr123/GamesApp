@@ -1,5 +1,6 @@
 package com.example.gamesapp.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,6 +33,8 @@ class HomeFragment : Fragment() {
     private val adapterGenres = GenreListAdapter()
     private lateinit var rvPopular: RecyclerView
     private val adapterPopular = GameListAdapter()
+    private lateinit var rvTrending: RecyclerView
+    private val adapterTrending = GameListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +49,12 @@ class HomeFragment : Fragment() {
 
         setUpRecyclerViewGamesPopular()
 
+        setUpRecyclerViewGamesTrending()
+
         return binding.root
     }
 
-
+    // Set up recycler view creators and adapter for section creators
     private fun setUpRecyclerViewCreators() {
 
         rvCreators = binding.incSectionCreators.rvCreator
@@ -79,6 +84,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Set up recycler view genres and adapter for section genres
     private fun setUpRecyclerViewGenres() {
 
         rvGenres = binding.incSectionGenres.rvGenres
@@ -108,6 +114,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Set up recycler view games popular and adapter for section games popular
     private fun setUpRecyclerViewGamesPopular() {
 
         rvPopular = binding.incSectionGames.rvGames
@@ -117,7 +124,8 @@ class HomeFragment : Fragment() {
                 is RawgApiResult.Success -> {
                     rvPopular.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvPopular.adapter = adapterPopular
-                    adapterPopular.submitList(response.data?.result)
+                    adapterPopular.submitList(response.data?.result?.subList(0, 10))
+                    adapterPopular.isGamesTop = true
                     binding.incSectionGames.lySectionGames.visible()
                     binding.progressLoader.root.gone()
                 }
@@ -131,6 +139,38 @@ class HomeFragment : Fragment() {
                 }
                 is RawgApiResult.Loading -> {
                     binding.incSectionGames.lySectionGames.gone()
+                    binding.progressLoader.root.visible()
+                }
+            }
+        }
+    }
+
+    // Set up recycler view games trending and adapter for section games trending
+    @SuppressLint("SetTextI18n")
+    private fun setUpRecyclerViewGamesTrending() {
+
+        rvTrending = binding.incSectionTrending.rvGames
+        binding.incSectionTrending.tvTitleSectionGames.text = "New and Trending"
+
+        homeViewModel.gamesTrending.observe(viewLifecycleOwner){ response ->
+            when (response) {
+                is RawgApiResult.Success -> {
+                    rvTrending.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    rvTrending.adapter = adapterTrending
+                    adapterTrending.submitList(response.data?.result)
+                    binding.incSectionTrending.lySectionGames.visible()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Failure -> {
+                    binding.incSectionTrending.lySectionGames.gone()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.ErrorThrowable -> {
+                    binding.incSectionTrending.lySectionGames.gone()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Loading -> {
+                    binding.incSectionTrending.lySectionGames.gone()
                     binding.progressLoader.root.visible()
                 }
             }
