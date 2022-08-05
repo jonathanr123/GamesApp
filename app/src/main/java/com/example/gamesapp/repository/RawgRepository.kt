@@ -49,4 +49,31 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
         }
     }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
 
+    // Get a list of games of the last year from the Rawg API
+    suspend fun getListOfGameLastYear(): Flow<RawgApiResult<RawgData<List<Games>>>> = flow {
+        val response = apiService.getListOfGames(dates = "2020-01-01,2020-12-31", ordering = "-added")
+        when (response.isSuccessful) {
+            true -> emit(RawgApiResult.Success(response.body()))
+            false -> emit(RawgApiResult.Failure(response.code()))
+        }
+    }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
+
+    // Get a list of games battle royale from the Rawg API
+    suspend fun getListOfGameTagSpecific(): Flow<RawgApiResult<RawgData<List<Games>>>> = flow {
+        val response = apiService.getListOfGames(tags = "35162")
+        when (response.isSuccessful) {
+            true -> emit(RawgApiResult.Success(response.body()))
+            false -> emit(RawgApiResult.Failure(response.code()))
+        }
+    }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
+
+    // Get a list of games published by Ubisoft from the Rawg API
+    suspend fun getListOfGamePublisherSpecific(): Flow<RawgApiResult<RawgData<List<Games>>>> = flow {
+        val response = apiService.getListOfGames(publishers = "918")
+        when (response.isSuccessful) {
+            true -> emit(RawgApiResult.Success(response.body()))
+            false -> emit(RawgApiResult.Failure(response.code()))
+        }
+    }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
+
 }

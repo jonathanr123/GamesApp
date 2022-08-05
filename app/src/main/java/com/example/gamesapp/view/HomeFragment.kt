@@ -35,6 +35,12 @@ class HomeFragment : Fragment() {
     private val adapterPopular = GameListAdapter()
     private lateinit var rvTrending: RecyclerView
     private val adapterTrending = GameListAdapter()
+    private lateinit var rvLastYear: RecyclerView
+    private val adapterLastYear = GameListAdapter()
+    private lateinit var rvTagSpecific: RecyclerView
+    private val adapterTagSpecific = GameListAdapter()
+    private lateinit var rvPublisherSpecific: RecyclerView
+    private val adapterPublisherSpecific = GameListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +53,9 @@ class HomeFragment : Fragment() {
         setUpRecyclerViewGenres()
         setUpRecyclerViewGamesPopular()
         setUpRecyclerViewGamesTrending()
+        setUpRecyclerViewGamesLastYear()
+        setUpRecyclerViewGamesTagSpecific()
+        setUpRecyclerViewGamesPublisherSpecific()
 
         return binding.root
     }
@@ -89,7 +98,7 @@ class HomeFragment : Fragment() {
         homeViewModel.genres.observe(viewLifecycleOwner){ response ->
             when (response) {
                 is RawgApiResult.Success -> {
-                    rvGenres.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    rvGenres.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvGenres.adapter = adapterGenres
                     adapterGenres.submitList(response.data?.result)
                     binding.incSectionGenres.lySectionGenres.visible()
@@ -155,6 +164,8 @@ class HomeFragment : Fragment() {
                     rvTrending.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvTrending.adapter = adapterTrending
                     adapterTrending.submitList(response.data?.result)
+                    adapterTrending.widthCard = 140
+                    adapterTrending.heightCard = 320
                     binding.incSectionTrending.lySectionGames.visible()
                     binding.progressLoader.root.gone()
                 }
@@ -168,6 +179,108 @@ class HomeFragment : Fragment() {
                 }
                 is RawgApiResult.Loading -> {
                     binding.incSectionTrending.lySectionGames.gone()
+                    binding.progressLoader.root.visible()
+                }
+            }
+        }
+    }
+
+    // Set up recycler view games of the last year and adapter for section games of the last year
+    @SuppressLint("SetTextI18n")
+    private fun setUpRecyclerViewGamesLastYear() {
+
+        rvLastYear = binding.incSectionLastYear.rvGames
+        binding.incSectionLastYear.tvTitleSectionGames.text = "Last Year"
+
+        homeViewModel.gamesLastYear.observe(viewLifecycleOwner){ response ->
+            when (response) {
+                is RawgApiResult.Success -> {
+                    rvLastYear.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    rvLastYear.adapter = adapterLastYear
+                    adapterLastYear.submitList(response.data?.result)
+                    adapterLastYear.widthCard = 90
+                    adapterLastYear.heightCard = 130
+                    binding.incSectionLastYear.lySectionGames.visible()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Failure -> {
+                    binding.incSectionLastYear.lySectionGames.gone()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.ErrorThrowable -> {
+                    binding.incSectionLastYear.lySectionGames.gone()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Loading -> {
+                    binding.incSectionLastYear.lySectionGames.gone()
+                    binding.progressLoader.root.visible()
+                }
+            }
+        }
+    }
+
+    // Set up recycler view games of the tag specified and adapter for section games of the tag specified
+    @SuppressLint("SetTextI18n")
+    private fun setUpRecyclerViewGamesTagSpecific() {
+
+        rvTagSpecific = binding.incSectionTag.rvGames
+        binding.incSectionTag.tvTitleSectionGames.text = "Battle Royale"
+
+        homeViewModel.gamesTagSpecific.observe(viewLifecycleOwner){ response ->
+            when (response) {
+                is RawgApiResult.Success -> {
+                    rvTagSpecific.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    rvTagSpecific.adapter = adapterTagSpecific
+                    adapterTagSpecific.submitList(response.data?.result)
+                    adapterTagSpecific.widthCard = 90
+                    adapterTagSpecific.heightCard = 130
+                    binding.incSectionTag.lySectionGames.visible()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Failure -> {
+                    binding.incSectionTag.lySectionGames.gone()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.ErrorThrowable -> {
+                    binding.incSectionTag.lySectionGames.gone()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Loading -> {
+                    binding.incSectionTag.lySectionGames.gone()
+                    binding.progressLoader.root.visible()
+                }
+            }
+        }
+    }
+
+    // Set up recycler view games of the Publisher specified and adapter for section games of the Publisher specified
+    @SuppressLint("SetTextI18n")
+    private fun setUpRecyclerViewGamesPublisherSpecific() {
+
+        rvPublisherSpecific = binding.incSectionPublisher.rvGames
+        binding.incSectionPublisher.tvTitleSectionGames.text = "By Ubisoft Entertainment"
+
+        homeViewModel.gamesPublisherSpecific.observe(viewLifecycleOwner){ response ->
+            when (response) {
+                is RawgApiResult.Success -> {
+                    rvPublisherSpecific.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    rvPublisherSpecific.adapter = adapterPublisherSpecific
+                    adapterPublisherSpecific.submitList(response.data?.result)
+                    adapterPublisherSpecific.widthCard = 90
+                    adapterPublisherSpecific.heightCard = 130
+                    binding.incSectionPublisher.lySectionGames.visible()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Failure -> {
+                    binding.incSectionPublisher.lySectionGames.gone()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.ErrorThrowable -> {
+                    binding.incSectionPublisher.lySectionGames.gone()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Loading -> {
+                    binding.incSectionPublisher.lySectionGames.gone()
                     binding.progressLoader.root.visible()
                 }
             }

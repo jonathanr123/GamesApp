@@ -64,6 +64,36 @@
                 android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/inc_section_games"/>
 
+            <!-- Section Last Year -->
+            <include
+                android:id="@+id/inc_section_last_year"
+                layout="@layout/section_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/inc_section_trending"/>
+
+            <!-- Section Tag specific -->
+            <include
+                android:id="@+id/inc_section_tag"
+                layout="@layout/section_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/inc_section_last_year"/>
+
+            <!-- Section Publisher specific -->
+            <include
+                android:id="@+id/inc_section_publisher"
+                layout="@layout/section_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/inc_section_tag"/>
+
             <!-- include shimmer loading home -->
             <include
                 android:id="@+id/progress_loader"
