@@ -76,6 +76,7 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
         }
     }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
 
+    // Get a list of all games, page by page, from the Rawg API
     fun getAllGames(): GamePagingSource {
         return GamePagingSource(apiService)
     }

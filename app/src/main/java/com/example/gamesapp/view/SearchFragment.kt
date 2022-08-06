@@ -43,6 +43,7 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
+    // Set up recycler view for all games list
     private suspend fun setUpRecyclerViewAllGames() {
         val layoutManager =
             if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -53,7 +54,7 @@ class SearchFragment : Fragment() {
         rvAllGames = binding.incSectionGames.rvGames
         rvAllGames.layoutManager = layoutManager
         rvAllGames.adapter = adapterAllGames
-        searchViewModel.flow.collectLatest { pagingData ->
+        searchViewModel.allGames.collectLatest { pagingData ->
             adapterAllGames.submitData(pagingData)
         }
         binding.incSectionGames.lySectionGames.visible()

@@ -12,11 +12,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val repository: RawgRepository) : ViewModel() {
 
-    val flow = Pager(
-        // Configure how data is loaded by passing additional properties to
-        // PagingConfig, such as prefetchDistance.
-        PagingConfig(pageSize = 40)
-    ) {
+    // flow for paging games list from repository
+    val allGames = Pager( PagingConfig(pageSize = 40) ) {
         repository.getAllGames()
     }.flow
         .cachedIn(viewModelScope)
