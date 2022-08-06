@@ -76,4 +76,8 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
         }
     }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
 
+    fun getAllGames(): GamePagingSource {
+        return GamePagingSource(apiService)
+    }
+
 }

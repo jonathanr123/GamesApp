@@ -198,8 +198,8 @@ class HomeFragment : Fragment() {
                     rvLastYear.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvLastYear.adapter = adapterLastYear
                     adapterLastYear.submitList(response.data?.result)
-                    adapterLastYear.widthCard = 90
-                    adapterLastYear.heightCard = 130
+                    adapterLastYear.widthCard = 110
+                    adapterLastYear.heightCard = 160
                     binding.incSectionLastYear.lySectionGames.visible()
                     binding.progressLoader.root.gone()
                 }
@@ -232,8 +232,8 @@ class HomeFragment : Fragment() {
                     rvTagSpecific.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvTagSpecific.adapter = adapterTagSpecific
                     adapterTagSpecific.submitList(response.data?.result)
-                    adapterTagSpecific.widthCard = 90
-                    adapterTagSpecific.heightCard = 130
+                    adapterTagSpecific.widthCard = 110
+                    adapterTagSpecific.heightCard = 160
                     binding.incSectionTag.lySectionGames.visible()
                     binding.progressLoader.root.gone()
                 }
@@ -266,8 +266,8 @@ class HomeFragment : Fragment() {
                     rvPublisherSpecific.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvPublisherSpecific.adapter = adapterPublisherSpecific
                     adapterPublisherSpecific.submitList(response.data?.result)
-                    adapterPublisherSpecific.widthCard = 90
-                    adapterPublisherSpecific.heightCard = 130
+                    adapterPublisherSpecific.widthCard = 110
+                    adapterPublisherSpecific.heightCard = 160
                     binding.incSectionPublisher.lySectionGames.visible()
                     binding.progressLoader.root.gone()
                 }
