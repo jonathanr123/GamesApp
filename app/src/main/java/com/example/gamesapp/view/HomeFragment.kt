@@ -13,10 +13,7 @@ import com.example.gamesapp.view.adapters.CreatorListAdapter
 import com.example.gamesapp.view.adapters.GameListAdapter
 import com.example.gamesapp.view.adapters.GenreListAdapter
 import com.example.gamesapp.databinding.FragmentHomeBinding
-import com.example.gamesapp.utils.RawgApiResult
-import com.example.gamesapp.utils.ZoomRecyclerLayout
-import com.example.gamesapp.utils.gone
-import com.example.gamesapp.utils.visible
+import com.example.gamesapp.utils.*
 import com.example.gamesapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

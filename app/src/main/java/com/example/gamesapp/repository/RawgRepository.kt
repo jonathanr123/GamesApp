@@ -1,6 +1,7 @@
 package com.example.gamesapp.repository
 
 import com.example.gamesapp.model.Creators
+import com.example.gamesapp.model.GameSingle
 import com.example.gamesapp.model.Games
 import com.example.gamesapp.model.Genres
 import com.example.gamesapp.services.RawgApiService
@@ -80,5 +81,14 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
     fun getAllGames(): GamePagingSource {
         return GamePagingSource(apiService)
     }
+
+    // Get a game by ID from the Rawg API
+    suspend fun getGameById(id: Int?): Flow<RawgApiResult<GameSingle>> = flow {
+        val response = apiService.getDetailsOfGame(id)
+        when (response.isSuccessful) {
+            true -> emit(RawgApiResult.Success(response.body()))
+            false -> emit(RawgApiResult.Failure(response.code()))
+        }
+    }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
 
 }

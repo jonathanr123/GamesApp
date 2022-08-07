@@ -6,10 +6,11 @@ import java.util.*
 data class Games(
     val id: Int? = 0,
     val name: String? = "",
+    val metacritic: Int? = 0,
     val released: String? = "",
     @SerializedName("background_image")
     val imageURL: String? = "",
-    val rating: Number? = 0,
+    val rating: Float? = 0.0f,
     @SerializedName("rating_top")
     val ratingTop: Int? = 0,
     val added: Int? = 0,
@@ -66,9 +67,7 @@ data class ShortScreenshot(
  */
 data class GameSingle(
     val id: Int,
-    val slug: String,
     val name: String,
-    val nameOriginal: String,
     val description: String,
     val metacritic: Int,
     val released: String,

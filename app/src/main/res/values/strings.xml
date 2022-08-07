@@ -12,4 +12,7 @@
     <string name="tv_title_section_genres">Categories</string>
     <string name="tv_name_genre">Name of Categories</string>
     <string name="content_description_loading">Loading</string>
+    <string name="tv_title_modal">Title of Game</string>
+    <string name="tv_date_modal">Date of Game</string>
+    <string name="tv_detail_modal">Details and more</string>
 </resources>

@@ -1,12 +1,14 @@
 package com.example.gamesapp.services
 
 import com.example.gamesapp.model.Creators
+import com.example.gamesapp.model.GameSingle
 import com.example.gamesapp.model.Games
 import com.example.gamesapp.model.Genres
 import com.example.gamesapp.utils.Constants
 import com.example.gamesapp.utils.RawgData
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RawgApiService {
@@ -74,5 +76,14 @@ interface RawgApiService {
         @Query("exclude_game_series") excludeGameSeries: Boolean? = null,
         @Query("ordering") ordering: String? = null
     ): Response<RawgData<List<Games>>>
+
+    /**
+     * Get details of the game.
+     * @return @[GameSingle]
+     */
+    @GET("games/{id}"+Constants.API_KEY)
+    suspend fun getDetailsOfGame(
+        @Path("id") id: Int? = null
+    ): Response<GameSingle>
 
 }

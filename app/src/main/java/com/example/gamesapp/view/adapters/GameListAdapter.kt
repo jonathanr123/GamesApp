@@ -10,6 +10,7 @@ import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.databinding.ItemGamesListBinding
 import com.example.gamesapp.model.Games
+import com.example.gamesapp.utils.showModalBottomSheetGames
 
 class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCallback()) {
 
@@ -72,8 +73,8 @@ class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCal
                     }
                 }
 
-                cvGames.setOnClickListener {
-                    listener?.invoke(value)
+                cardGames.setOnClickListener {
+                    showModalBottomSheetGames(value, binding.root.context)
                 }
             }
         }
