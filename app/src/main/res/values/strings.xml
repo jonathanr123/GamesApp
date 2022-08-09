@@ -12,7 +12,14 @@
     <string name="tv_title_section_genres">Categories</string>
     <string name="tv_name_genre">Name of Categories</string>
     <string name="content_description_loading">Loading</string>
-    <string name="tv_title_modal">Title of Game</string>
+    <string name="tv_title_modal">SPIDER-MAN: HOMECOMING</string>
     <string name="tv_date_modal">Date of Game</string>
     <string name="tv_detail_modal">Details and more</string>
+    <string name="tv_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+    <string name="tv_see_more">MORE ABOUT THIS GAME</string>
+    <string name="tv_rating">Rating:</string>
+    <string name="tv_genre">Genre:</string>
+    <string name="tv_platform">Platforms:</string>
+    <string name="tv_developer">Developers:</string>
+    <string name="tv_website">websiteURL</string>
 </resources>

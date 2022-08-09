@@ -1,6 +1,7 @@
 package com.example.gamesapp.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 
 data class Games(
@@ -11,96 +12,56 @@ data class Games(
     @SerializedName("background_image")
     val imageURL: String? = "",
     val rating: Float? = 0.0f,
-    @SerializedName("rating_top")
-    val ratingTop: Int? = 0,
-    val added: Int? = 0,
-    val playtime: Int? = 0,
+    val platforms: List<Platforms>? = listOf(),
+    val genres: List<Genres>? = listOf(),
     @SerializedName("short_screenshots")
-    val shortScreenshots: List<ShortScreenshot>
-)
+    val shortScreenshots: List<ShortScreenshot>? = listOf(),
+) : Serializable
+
+data class Platforms(
+    val platform: Platform? = Platform(),
+) : Serializable
+
+data class Platform(
+    val id: Int? = 0,
+    val name:String? = ""
+) : Serializable
 
 data class ShortScreenshot(
     val id: Int? = 0,
     val image: String? = ""
-)
+) : Serializable
 
 /**
  * @property id integer (ID)
- * @property slug string <slug> (Slug)^[-a-zA-Z0-9_]+$
  * @property name string (Name) non-empty
- * @property nameOriginal string (Name original) non-empty
  * @property description string (Description) non-empty
  * @property metacritic integer (Metacritic)
  * @property released string <date> (Released)
- * @property tba boolean (TBA)
- * @property updated string <date-time> (Updated)
  * @property backgroundImageURL string <uri> (Background image)
- * @property backgroundImageAdditionalURL string (Background image additional)
  * @property websiteURL string <uri> (Website) non-empty
- * @property ratingTop integer (Rating top)
- * @property ratingObj object (Ratings)
- * @property reactions object (Reactions)
- * @property added integer (Added)
- * @property addedByStatus object (Added by status)
- * @property playtime integer (Playtime) in hours
- * @property screenshotsCount integer (Screenshots count)
- * @property moviesCount integer (Movies count)
- * @property creatorsCount integer (Creators count)
- * @property achievementsCount integer (Achievements count)
- * @property parentAchievementsCount string (Parent achievements count)
- * @property redditURL string (Reddit url) non-empty For example "https://www.reddit.com/r/uncharted/" or "uncharted"
- * @property redditName string (Reddit name) non-empty
- * @property redditDescription string (Reddit description) non-empty
- * @property redditLogoURL string <uri> (Reddit logo) non-empty
- * @property redditCount integer (Reddit count)
- * @property twitchCount string (Twitch count)
- * @property youtubeCount string (Youtube count)
- * @property reviewsTextCount string (Reviews text count)
- * @property ratingsCount integer (Ratings count)
- * @property suggestionsCount integer (Suggestions count)
- * @property alternativeNames Array of strings (Alternative names)
- * @property metacriticURL string (Metacritic url) non-empty For example "http://www.metacritic.com/game/playstation-4/the-witcher-3-wild-hunt"
- * @property parentsCount integer (Parents count)
- * @property additionsCount integer (Additions count)
- * @property gameSeriesCount integer (Game series count)
+ * @property rating float (Rating)
+ * @property developers array of objects (Developers) non-empty
  *
  */
 data class GameSingle(
-    val id: Int,
-    val name: String,
-    val description: String,
-    val metacritic: Int,
-    val released: String,
-    val tba: Boolean,
-    val updated: String,
-    val backgroundImageURL: String,
-    val backgroundImageAdditionalURL: String,
-    val websiteURL: String,
-    val rating: Number,
-    val ratingTop: Int,
-    val reactions: Objects,
-    val added: Int,
-    val playtime: Int,
-    val screenshotsCount: Int,
-    val moviesCount: Int,
-    val creatorsCount: Int,
-    val achievementsCount: Int,
-    val parentAchievementsCount: Int,
-    val redditURL: String,
-    val redditName: String,
-    val redditDescription: String,
-    val redditLogoURL: String,
-    val redditCount: Int,
-    val twitchCount: String,
-    val youtubeCount: String,
-    val reviewsTextCount: String,
-    val ratingsCount: Int,
-    val suggestionsCount: Int,
-    val alternativeNames: List<String>,
-    val metacriticURL: String,
-    val parentsCount: Int,
-    val additionsCount: Int,
-    val gameSeriesCount: Int
+    val id: Int? = 0,
+    val name: String? = "",
+    @SerializedName("description_raw")
+    val description: String? = "",
+    val metacritic: Int? = 0,
+    val released: String? = "",
+    @SerializedName("background_image")
+    val imageURL: String? = "",
+    @SerializedName("website")
+    val websiteURL: String? = "",
+    val rating: Float? = 0.0f,
+    val developers: List<Developer>? = listOf(),
+)
+
+data class Developer(
+    val id:Int? = 0,
+    val name:String? = ""
 )
 
 

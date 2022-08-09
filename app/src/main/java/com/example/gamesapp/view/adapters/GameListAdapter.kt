@@ -3,6 +3,7 @@ package com.example.gamesapp.view.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -18,10 +19,11 @@ class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCal
     var isGamesTop: Boolean = false
     var widthCard: Int = 180
     var heightCard: Int = 250
+    var manager: FragmentManager? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: ViewHolder = holder as ViewHolder
-        viewHolder.bind(getItem(position), onItemClicked, position, isGamesTop, widthCard, heightCard)
+        viewHolder.bind(getItem(position), onItemClicked, position, isGamesTop, widthCard, heightCard, manager)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -42,7 +44,8 @@ class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCal
             position: Int,
             isGamesTop: Boolean,
             widthCard: Int,
-            heightCard: Int
+            heightCard: Int,
+            manager: FragmentManager? = null
         ) {
             with(binding) {
                 ivGames.load(value.imageURL)
@@ -74,7 +77,7 @@ class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCal
                 }
 
                 cardGames.setOnClickListener {
-                    showModalBottomSheetGames(value, binding.root.context)
+                    showModalBottomSheetGames(value, binding.root.context, manager)
                 }
             }
         }

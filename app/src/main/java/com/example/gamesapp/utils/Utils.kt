@@ -1,11 +1,18 @@
 package com.example.gamesapp.utils
 
+import android.app.Dialog
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
 import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.model.Games
+import com.example.gamesapp.model.ShortScreenshot
+import com.example.gamesapp.view.GameDetailFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 fun View.visible(): View {
@@ -25,7 +32,7 @@ fun String.convertDate(): String {
 }
 
 // Function that show bottom sheet dialog with game details
-fun showModalBottomSheetGames(games: Games, context: Context) {
+fun showModalBottomSheetGames(games: Games, context: Context, parentFragmentManager: FragmentManager? = null) {
     val dialog = BottomSheetDialog(context)
     dialog.setContentView(R.layout.bottom_sheet)
     dialog.dismissWithAnimation = true
@@ -33,6 +40,12 @@ fun showModalBottomSheetGames(games: Games, context: Context) {
     modal?.setOnClickListener {
         // Navigate to detail activity
         Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+        dialog.dismiss()
+        // Navigate to Game Detail Fragment with object games
+        parentFragmentManager?.setFragmentResult("game_detail", bundleOf("game" to games))
+        parentFragmentManager?.beginTransaction()
+            ?.replace(R.id.fragmentContainerView, GameDetailFragment())?.addToBackStack(null)
+            ?.commit()
     }
     val image = dialog.findViewById<ImageView>(R.id.iv_image_modal)
     image?.load(games.imageURL)
@@ -46,5 +59,30 @@ fun showModalBottomSheetGames(games: Games, context: Context) {
     btnClose?.setOnClickListener {
         dialog.dismiss()
     }
+    dialog.show()
+}
+
+// Show dialog with screenshot of game
+fun showDialogScreenshot (screenshot: ShortScreenshot, context: Context) {
+    // Create image view for each screenshot
+    val image = ImageView(context)
+    image.load(screenshot.image)
+    // Resize image
+    // saber tamaño de pantalla
+    image.layoutParams = ViewGroup.LayoutParams(
+        context.resources.displayMetrics.widthPixels,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
+    image.scaleType = ImageView.ScaleType.CENTER_CROP
+    // Add image to ConstraintLayout
+    val constraint = ConstraintLayout(context)
+    constraint.layoutParams = ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
+    constraint.addView(image)
+    // Set view to dialog layout and show dialog
+    val dialog = Dialog(context)
+    dialog.setContentView(constraint)
     dialog.show()
 }

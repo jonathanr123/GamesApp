@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gamesapp.R
 import com.example.gamesapp.view.adapters.CreatorListAdapter
 import com.example.gamesapp.view.adapters.GameListAdapter
 import com.example.gamesapp.view.adapters.GenreListAdapter
 import com.example.gamesapp.databinding.FragmentHomeBinding
 import com.example.gamesapp.utils.*
 import com.example.gamesapp.viewmodel.HomeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,6 +47,10 @@ class HomeFragment : Fragment() {
     ): View {
 
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+
+        // Show bottom navigation view
+        val activity = requireActivity() as MainActivity
+        activity.findViewById<BottomNavigationView>(R.id.navigationView).visible()
 
         setUpRecyclerViewCreators()
         setUpRecyclerViewGenres()
@@ -128,6 +134,7 @@ class HomeFragment : Fragment() {
                     rvPopular.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvPopular.adapter = adapterPopular
                     adapterPopular.submitList(response.data?.result?.subList(0, 10))
+                    adapterPopular.manager = parentFragmentManager
                     adapterPopular.isGamesTop = true
                     binding.incSectionGames.lySectionGames.visible()
                     binding.progressLoader.root.gone()
@@ -161,6 +168,7 @@ class HomeFragment : Fragment() {
                     rvTrending.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvTrending.adapter = adapterTrending
                     adapterTrending.submitList(response.data?.result)
+                    adapterTrending.manager = parentFragmentManager
                     adapterTrending.widthCard = 140
                     adapterTrending.heightCard = 320
                     binding.incSectionTrending.lySectionGames.visible()
@@ -195,6 +203,7 @@ class HomeFragment : Fragment() {
                     rvLastYear.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvLastYear.adapter = adapterLastYear
                     adapterLastYear.submitList(response.data?.result)
+                    adapterLastYear.manager = parentFragmentManager
                     adapterLastYear.widthCard = 110
                     adapterLastYear.heightCard = 160
                     binding.incSectionLastYear.lySectionGames.visible()
@@ -229,6 +238,7 @@ class HomeFragment : Fragment() {
                     rvTagSpecific.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvTagSpecific.adapter = adapterTagSpecific
                     adapterTagSpecific.submitList(response.data?.result)
+                    adapterTagSpecific.manager = parentFragmentManager
                     adapterTagSpecific.widthCard = 110
                     adapterTagSpecific.heightCard = 160
                     binding.incSectionTag.lySectionGames.visible()
@@ -263,6 +273,7 @@ class HomeFragment : Fragment() {
                     rvPublisherSpecific.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvPublisherSpecific.adapter = adapterPublisherSpecific
                     adapterPublisherSpecific.submitList(response.data?.result)
+                    adapterPublisherSpecific.manager = parentFragmentManager
                     adapterPublisherSpecific.widthCard = 110
                     adapterPublisherSpecific.heightCard = 160
                     binding.incSectionPublisher.lySectionGames.visible()

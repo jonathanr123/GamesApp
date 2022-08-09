@@ -23,4 +23,10 @@
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
 
+    <fragment
+        android:id="@+id/GameDetailFragment"
+        android:name="com.example.gamesapp.view.GameDetailFragment"
+        android:label="fragment_game_detail"
+        tools:layout="@layout/fragment_game_detail" />
+
 </navigation>
