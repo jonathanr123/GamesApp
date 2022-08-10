@@ -1,31 +1,30 @@
 package com.example.gamesapp.view.adapters
 
-import com.example.gamesapp.model.Games
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
-import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.gamesapp.databinding.ItemGamesListBinding
-import com.example.gamesapp.utils.showModalBottomSheetGames
+import com.example.gamesapp.R
+import com.example.gamesapp.databinding.ItemSearchListBinding
+import com.example.gamesapp.model.Games
+import com.example.gamesapp.view.GameDetailFragment
 
-class AllGamesListAdapter : PagingDataAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCallback()) {
+class SearchListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCallback()) {
 
     private var onItemClicked: ((Games) -> Unit)? = null
-    private var widthCard: Int = 120
-    private var heightCard: Int = 170
     var manager: FragmentManager? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: ViewHolder = holder as ViewHolder
-        getItem(position)?.let { viewHolder.bind(it, onItemClicked, widthCard, heightCard, manager) }
+        viewHolder.bind(getItem(position), onItemClicked, manager)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = ItemGamesListBinding.inflate(
+        val binding = ItemSearchListBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -33,27 +32,26 @@ class AllGamesListAdapter : PagingDataAdapter<Games, RecyclerView.ViewHolder> (D
         return ViewHolder(binding)
     }
 
-    class ViewHolder(private val binding: ItemGamesListBinding) :
-        RecyclerView.ViewHolder(binding.cvGames) {
+    class ViewHolder(private val binding: ItemSearchListBinding) :
+        RecyclerView.ViewHolder(binding.cvGameSearch) {
 
         internal fun bind(
             value: Games,
             listener: ((Games) -> Unit)?,
-            widthCard: Int,
-            heightCard: Int,
             manager: FragmentManager? = null
         ) {
             with(binding) {
-                ivGames.load(value.imageURL)
+                ivImageSearch.load(value.imageURL)
+                tvTitleSearch.text = value.name
+                tvDateSearch.text = value.released
+                rbarRatingSearch.rating = value.rating!!
 
-                // Resize the card view depending the parameters received
-                cardGames.layoutParams.width =
-                    (binding.root.context.resources.displayMetrics.density * widthCard).toInt()
-                ivGames.layoutParams.height =
-                    (binding.root.context.resources.displayMetrics.density * heightCard).toInt()
-
-                cardGames.setOnClickListener {
-                    showModalBottomSheetGames(value, binding.root.context, manager)
+                cvGameSearch.setOnClickListener {
+                    // Navigate to Game Detail Fragment with object games
+                    manager?.setFragmentResult("game_detail", bundleOf("game" to value))
+                    manager?.beginTransaction()
+                        ?.replace(R.id.fragmentContainerView, GameDetailFragment())?.addToBackStack(null)
+                        ?.commit()
                 }
             }
         }

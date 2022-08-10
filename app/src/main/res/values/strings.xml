@@ -22,4 +22,6 @@
     <string name="tv_platform">Platforms:</string>
     <string name="tv_developer">Developers:</string>
     <string name="tv_website">websiteURL</string>
+    <string name="search_game">Search game</string>
+    <string name="tv_title_item_search">Title of Game</string>
 </resources>

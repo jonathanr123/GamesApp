@@ -91,4 +91,13 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
         }
     }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
 
+    // Get a list of games searched by name from the Rawg API
+    suspend fun getGameByName(nameSearch:String? = null): Flow<RawgApiResult<RawgData<List<Games>>>> = flow {
+        val response = apiService.getListOfGames(search = nameSearch)
+        when (response.isSuccessful) {
+            true -> emit(RawgApiResult.Success(response.body()))
+            false -> emit(RawgApiResult.Failure(response.code()))
+        }
+    }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
+
 }

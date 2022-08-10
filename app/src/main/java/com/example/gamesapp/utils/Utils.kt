@@ -38,8 +38,6 @@ fun showModalBottomSheetGames(games: Games, context: Context, parentFragmentMana
     dialog.dismissWithAnimation = true
     val modal = dialog.findViewById<View>(R.id.standard_bottom_sheet)
     modal?.setOnClickListener {
-        // Navigate to detail activity
-        Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
         dialog.dismiss()
         // Navigate to Game Detail Fragment with object games
         parentFragmentManager?.setFragmentResult("game_detail", bundleOf("game" to games))
