@@ -1,4 +1,4 @@
-# GamesApp 🔥 📱 🎮
+# GamesApp 🔥 📱 🎮  (⚠️Sigue en Desarrollo)
 <img src="https://img.shields.io/badge/-Android-black?style=flat&logo=android">
 
 App que provee información sobre juegos, permite que los jugadores puedan gestionar sus juegos favoritos, y establecer alertas para ser informados de los nuevos lanzamientos. Uso de RAWG API.
