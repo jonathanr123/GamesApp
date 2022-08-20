@@ -1,7 +1,7 @@
-package com.example.gamesapp.view.adapters
+package com.example.gamesapp.ui.view.adapters
 
 import com.example.gamesapp.databinding.ItemScreenshotListBinding
-import com.example.gamesapp.model.ShortScreenshot
+import com.example.gamesapp.data.model.ShortScreenshot
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter

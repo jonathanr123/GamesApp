@@ -1,18 +1,15 @@
-package com.example.gamesapp.viewmodel
+package com.example.gamesapp.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gamesapp.model.Creators
-import com.example.gamesapp.model.GameSingle
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.repository.RawgRepository
+import com.example.gamesapp.data.model.GameSingle
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.data.repository.RawgRepository
 import com.example.gamesapp.utils.RawgApiResult
-import com.example.gamesapp.utils.RawgData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import java.lang.Exception

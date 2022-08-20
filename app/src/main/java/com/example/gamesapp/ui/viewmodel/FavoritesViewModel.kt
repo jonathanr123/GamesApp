@@ -1,7 +1,7 @@
-package com.example.gamesapp.viewmodel
+package com.example.gamesapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.gamesapp.repository.RawgRepository
+import com.example.gamesapp.data.repository.RawgRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

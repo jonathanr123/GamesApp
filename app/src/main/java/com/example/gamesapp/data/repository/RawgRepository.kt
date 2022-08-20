@@ -1,10 +1,10 @@
-package com.example.gamesapp.repository
+package com.example.gamesapp.data.repository
 
-import com.example.gamesapp.model.Creators
-import com.example.gamesapp.model.GameSingle
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.model.Genres
-import com.example.gamesapp.services.RawgApiService
+import com.example.gamesapp.data.model.Creators
+import com.example.gamesapp.data.model.GameSingle
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.data.model.Genres
+import com.example.gamesapp.data.services.RawgApiService
 import com.example.gamesapp.utils.RawgApiResult
 import com.example.gamesapp.utils.RawgData
 import kotlinx.coroutines.flow.Flow

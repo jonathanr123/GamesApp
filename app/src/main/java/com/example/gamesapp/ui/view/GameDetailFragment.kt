@@ -1,4 +1,4 @@
-package com.example.gamesapp.view
+package com.example.gamesapp.ui.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.databinding.FragmentGameDetailBinding
-import com.example.gamesapp.model.Games
+import com.example.gamesapp.data.model.Games
 import com.example.gamesapp.utils.*
-import com.example.gamesapp.view.adapters.ScreenshotListAdapter
-import com.example.gamesapp.viewmodel.GameDetailViewModel
+import com.example.gamesapp.ui.view.adapters.ScreenshotListAdapter
+import com.example.gamesapp.ui.viewmodel.GameDetailViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 

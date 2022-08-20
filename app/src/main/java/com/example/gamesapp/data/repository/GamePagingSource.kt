@@ -1,9 +1,9 @@
-package com.example.gamesapp.repository
+package com.example.gamesapp.data.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.services.RawgApiService
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.data.services.RawgApiService
 import javax.inject.Inject
 
 class GamePagingSource  @Inject constructor(

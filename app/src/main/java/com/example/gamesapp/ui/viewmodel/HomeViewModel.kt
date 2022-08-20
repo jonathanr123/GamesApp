@@ -1,13 +1,13 @@
-package com.example.gamesapp.viewmodel
+package com.example.gamesapp.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gamesapp.model.Creators
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.model.Genres
-import com.example.gamesapp.repository.RawgRepository
+import com.example.gamesapp.data.model.Creators
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.data.model.Genres
+import com.example.gamesapp.data.repository.RawgRepository
 import com.example.gamesapp.utils.RawgApiResult
 import com.example.gamesapp.utils.RawgData
 import dagger.hilt.android.lifecycle.HiltViewModel

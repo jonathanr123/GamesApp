@@ -1,4 +1,4 @@
-package com.example.gamesapp.viewmodel
+package com.example.gamesapp.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.repository.RawgRepository
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.data.repository.RawgRepository
 import com.example.gamesapp.utils.RawgApiResult
 import com.example.gamesapp.utils.RawgData
 import dagger.hilt.android.lifecycle.HiltViewModel

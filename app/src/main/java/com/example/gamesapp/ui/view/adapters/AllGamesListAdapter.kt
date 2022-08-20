@@ -1,6 +1,6 @@
-package com.example.gamesapp.view.adapters
+package com.example.gamesapp.ui.view.adapters
 
-import com.example.gamesapp.model.Games
+import com.example.gamesapp.data.model.Games
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

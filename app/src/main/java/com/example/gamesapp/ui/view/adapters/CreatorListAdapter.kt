@@ -1,4 +1,4 @@
-package com.example.gamesapp.view.adapters
+package com.example.gamesapp.ui.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.gamesapp.databinding.ItemCreatorListBinding
-import com.example.gamesapp.model.Creators
+import com.example.gamesapp.data.model.Creators
 
 class CreatorListAdapter : ListAdapter<Creators, RecyclerView.ViewHolder> (DiffUtilCallback()) {
 

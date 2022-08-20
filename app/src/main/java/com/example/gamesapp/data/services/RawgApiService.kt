@@ -1,9 +1,9 @@
-package com.example.gamesapp.services
+package com.example.gamesapp.data.services
 
-import com.example.gamesapp.model.Creators
-import com.example.gamesapp.model.GameSingle
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.model.Genres
+import com.example.gamesapp.data.model.Creators
+import com.example.gamesapp.data.model.GameSingle
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.data.model.Genres
 import com.example.gamesapp.utils.Constants
 import com.example.gamesapp.utils.RawgData
 import retrofit2.Response

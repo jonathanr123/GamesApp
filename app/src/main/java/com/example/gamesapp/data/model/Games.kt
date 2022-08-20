@@ -1,4 +1,4 @@
-package com.example.gamesapp.model
+package com.example.gamesapp.data.model
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -65,26 +65,6 @@ data class Developer(
 )
 
 
-data class GamePersonList(
-    val id: Int,
-    val name: String,
-    val slug: String,
-    val imageURL: String,
-    val imageBackground: String,
-    val gameCount: Int
-)
-
-/**
- * @property boolean (Hidden) Default: false Set image as hidden or visible.
- */
-data class ScreenShot(
-    val id: Int,
-    val imageURL: String,
-    val hidden: Boolean,
-    val width: Int,
-    val height: Int
-)
-
 /**
  * Get links to the stores that sell the game.
  */
@@ -93,65 +73,4 @@ data class GameStoreFull(
     val gameID: Int,
     val storeID: Int,
     val url: String
-)
-
-/**
- * Get a list of game achievements.
- */
-data class Achievement(
-    val id: Int,
-    val name: String,
-    val description: String,
-    val imageURL: String,
-    val percent: String
-)
-
-/**
- * Get a list of most recent posts from the game's subreddit.
- */
-data class RecentPosts(
-    val id: Int,
-    val name: String,
-    val text: String,
-    val imageURL: String,
-    val URL: String,
-    val username: String,
-    val usernameURL: String,
-    val created: String
-)
-
-/**
- * Get streams on Twitch associated with the game
- */
-data class TwitchStreams(
-    val id: Int,
-    val externalID: Int,
-    val name: String,
-    val description: String,
-    val created: String,
-    val published: String,
-    val thumbnailURL: String,
-    val viewCount: Int,
-    val language: String
-)
-
-/**
- * Get videos from YouTube associated with the game.
- *
- * channel_id
- */
-data class YoutubeChannels(
-    val id: Int,
-    val externalID: String,
-    val channelID: String,
-    val channelTitle: String,
-    val name: String,
-    val description: String,
-    val created: String,
-    val viewCount: Int,
-    val commentCount: Int,
-    val likeCount: Int,
-    val dislikeCount: Int,
-    val favoriteCount: Int,
-    val thumbnails: Objects
 )

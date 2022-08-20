@@ -10,9 +10,9 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import coil.load
 import com.example.gamesapp.R
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.model.ShortScreenshot
-import com.example.gamesapp.view.GameDetailFragment
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.data.model.ShortScreenshot
+import com.example.gamesapp.ui.view.GameDetailFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 fun View.visible(): View {

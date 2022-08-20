@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GamesApp">
         <activity
-            android:name=".view.MainActivity"
+            android:name="com.example.gamesapp.ui.view.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>

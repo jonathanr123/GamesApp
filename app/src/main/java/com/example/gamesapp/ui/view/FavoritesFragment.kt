@@ -1,4 +1,4 @@
-package com.example.gamesapp.view
+package com.example.gamesapp.ui.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.gamesapp.databinding.FragmentFavoritesBinding
-import com.example.gamesapp.viewmodel.FavoritesViewModel
+import com.example.gamesapp.ui.viewmodel.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

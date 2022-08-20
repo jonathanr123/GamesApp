@@ -1,4 +1,4 @@
-package com.example.gamesapp.view.adapters
+package com.example.gamesapp.ui.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.databinding.ItemSearchListBinding
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.view.GameDetailFragment
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.ui.view.GameDetailFragment
 
 class SearchListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCallback()) {
 

@@ -1,6 +1,7 @@
-package com.example.gamesapp.services
+package com.example.gamesapp.di
 
 import com.example.gamesapp.BuildConfig
+import com.example.gamesapp.data.services.RawgApiService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides

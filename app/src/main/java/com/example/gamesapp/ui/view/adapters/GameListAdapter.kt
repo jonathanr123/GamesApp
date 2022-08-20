@@ -1,4 +1,4 @@
-package com.example.gamesapp.view.adapters
+package com.example.gamesapp.ui.view.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.databinding.ItemGamesListBinding
-import com.example.gamesapp.model.Games
+import com.example.gamesapp.data.model.Games
 import com.example.gamesapp.utils.showModalBottomSheetGames
 
 class GameListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCallback()) {

@@ -1,4 +1,4 @@
-package com.example.gamesapp.view
+package com.example.gamesapp.ui.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,12 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamesapp.R
-import com.example.gamesapp.view.adapters.CreatorListAdapter
-import com.example.gamesapp.view.adapters.GameListAdapter
-import com.example.gamesapp.view.adapters.GenreListAdapter
+import com.example.gamesapp.ui.view.adapters.CreatorListAdapter
+import com.example.gamesapp.ui.view.adapters.GameListAdapter
+import com.example.gamesapp.ui.view.adapters.GenreListAdapter
 import com.example.gamesapp.databinding.FragmentHomeBinding
 import com.example.gamesapp.utils.*
-import com.example.gamesapp.viewmodel.HomeViewModel
+import com.example.gamesapp.ui.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 

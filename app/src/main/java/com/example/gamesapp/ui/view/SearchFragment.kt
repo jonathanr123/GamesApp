@@ -1,4 +1,4 @@
-package com.example.gamesapp.view
+package com.example.gamesapp.ui.view
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -17,9 +17,9 @@ import com.example.gamesapp.databinding.FragmentSearchBinding
 import com.example.gamesapp.utils.RawgApiResult
 import com.example.gamesapp.utils.gone
 import com.example.gamesapp.utils.visible
-import com.example.gamesapp.view.adapters.AllGamesListAdapter
-import com.example.gamesapp.view.adapters.SearchListAdapter
-import com.example.gamesapp.viewmodel.SearchViewModel
+import com.example.gamesapp.ui.view.adapters.AllGamesListAdapter
+import com.example.gamesapp.ui.view.adapters.SearchListAdapter
+import com.example.gamesapp.ui.viewmodel.SearchViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
