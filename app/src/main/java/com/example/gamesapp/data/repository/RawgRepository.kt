@@ -1,10 +1,12 @@
 package com.example.gamesapp.data.repository
 
+import com.example.gamesapp.data.database.GamesDB
 import com.example.gamesapp.data.model.Creators
 import com.example.gamesapp.data.model.GameSingle
 import com.example.gamesapp.data.model.Games
 import com.example.gamesapp.data.model.Genres
 import com.example.gamesapp.data.services.RawgApiService
+import com.example.gamesapp.domain.model.GamesItem
 import com.example.gamesapp.utils.RawgApiResult
 import com.example.gamesapp.utils.RawgData
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +14,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class RawgRepository @Inject constructor(private val apiService: RawgApiService) {
+class RawgRepository @Inject constructor(private val apiService: RawgApiService, private val db: GamesDB) {
 
     // Get a list of games creators from the Rawg API
     suspend fun getListOfGameCreators(): Flow<RawgApiResult<RawgData<List<Creators>>>> = flow {
@@ -99,5 +101,21 @@ class RawgRepository @Inject constructor(private val apiService: RawgApiService)
             false -> emit(RawgApiResult.Failure(response.code()))
         }
     }.catch { exception -> emit(RawgApiResult.ErrorThrowable(exception.cause)) }
+
+    // Get a list of games saved in the database
+    suspend fun getAllGamesFromDB(): Flow<List<GamesItem>> = flow {
+        val response = db.gamesDao.getAllGames()
+        emit(response.map { it.toDomain() })
+    }
+
+    // Post a game to the database
+    suspend fun postGameToDB(game: Games) {
+        db.gamesDao.insertAllGames(game.toDatabase())
+    }
+
+    // Delete a game from the database
+    suspend fun deleteGameFromDB(game: Games) {
+        db.gamesDao.deleteGame(game.toDatabase())
+    }
 
 }

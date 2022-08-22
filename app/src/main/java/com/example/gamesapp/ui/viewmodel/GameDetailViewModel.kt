@@ -25,6 +25,9 @@ class GameDetailViewModel @Inject constructor(private val repository: RawgReposi
         MutableLiveData(RawgApiResult.loading())
     val gameDetail: LiveData<RawgApiResult<GameSingle>> = _gameDetail
 
+    private val _isFavorite: MutableLiveData<Boolean> = MutableLiveData()
+    val isFavorite: LiveData<Boolean> = _isFavorite
+
     // set game selected to live data
     fun setGameSelected(game: Games? = null) {
         _gameSelected.value = game
@@ -49,6 +52,36 @@ class GameDetailViewModel @Inject constructor(private val repository: RawgReposi
 
                         is RawgApiResult.Loading ->
                             _gameDetail.postValue(RawgApiResult.loading())
+                    }
+                }
+        }
+    }
+
+    // Insert favorite game into the repository (database)
+    fun insertFavoriteGame() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.postGameToDB(gameSelected.value as Games)
+        }
+    }
+
+    // Delete favorite game from the repository (database)
+    fun deleteFavoriteGame() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteGameFromDB(gameSelected.value as Games)
+        }
+    }
+
+    // Fetch favorite games from the repository (database) and update LiveData with the result
+    fun isFavoriteGame() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getAllGamesFromDB()
+                .catch { _isFavorite.postValue(false) }
+                .collect { response ->
+                    // Verify if the game selected is favorite list in the DB
+                    if (response.contains(gameSelected.value?.toDomain())) {
+                        _isFavorite.postValue(true)
+                    } else {
+                        _isFavorite.postValue(false)
                     }
                 }
         }

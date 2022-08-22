@@ -1,5 +1,7 @@
 package com.example.gamesapp.data.model
 
+import com.example.gamesapp.data.database.entities.GamesEntity
+import com.example.gamesapp.domain.model.GamesItem
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.util.*
@@ -16,7 +18,14 @@ data class Games(
     val genres: List<Genres>? = listOf(),
     @SerializedName("short_screenshots")
     val shortScreenshots: List<ShortScreenshot>? = listOf(),
-) : Serializable
+) : Serializable {
+    fun toDatabase(): GamesEntity {
+        return GamesEntity(id = id, name = name, imageURL = imageURL)
+    }
+    fun toDomain(): GamesItem {
+        return GamesItem(id = id, name = name, imageURL = imageURL)
+    }
+}
 
 data class Platforms(
     val platform: Platform? = Platform(),
@@ -38,7 +47,7 @@ data class ShortScreenshot(
  * @property description string (Description) non-empty
  * @property metacritic integer (Metacritic)
  * @property released string <date> (Released)
- * @property backgroundImageURL string <uri> (Background image)
+ * @property imageURL string <uri> (Background image)
  * @property websiteURL string <uri> (Website) non-empty
  * @property rating float (Rating)
  * @property developers array of objects (Developers) non-empty

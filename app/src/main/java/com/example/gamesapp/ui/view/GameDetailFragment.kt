@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.RecyclerView
@@ -56,7 +57,38 @@ class GameDetailFragment : Fragment() {
 
         setUpViewAdditional()
 
+        setUpClickListenerBtnFavorite()
+
         return binding.root
+    }
+
+    // Set up click listener of btnFavorite depending if the game is favorite list in the DB
+    private fun setUpClickListenerBtnFavorite() {
+
+        gameDetailViewModel.isFavoriteGame()
+
+        gameDetailViewModel.isFavorite.observe(viewLifecycleOwner){ response ->
+            response as Boolean
+            if(response){
+                binding.ivBtnFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gold))
+                binding.ivBtnFavorite.setOnClickListener {
+                    // Delete game of the favorite list in the DB
+                    gameDetailViewModel.deleteFavoriteGame()
+                    // Change tint color of ivBtnFavorite
+                    binding.ivBtnFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_shimmer))
+                    gameDetailViewModel.isFavoriteGame()
+                }
+            }else{
+                binding.ivBtnFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_shimmer))
+                binding.ivBtnFavorite.setOnClickListener {
+                    // Insert game in the favorite list in the DB
+                    gameDetailViewModel.insertFavoriteGame()
+                    // Change tint color of ivBtnFavorite
+                    binding.ivBtnFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gold))
+                    gameDetailViewModel.isFavoriteGame()
+                }
+            }
+        }
     }
 
     // Set up view for info received from previous fragment
