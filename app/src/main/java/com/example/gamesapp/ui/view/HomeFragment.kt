@@ -1,18 +1,19 @@
 package com.example.gamesapp.ui.view
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.VideoView
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamesapp.R
-import com.example.gamesapp.ui.view.adapters.CreatorListAdapter
 import com.example.gamesapp.ui.view.adapters.GameListAdapter
-import com.example.gamesapp.ui.view.adapters.GenreListAdapter
 import com.example.gamesapp.databinding.FragmentHomeBinding
 import com.example.gamesapp.utils.*
 import com.example.gamesapp.ui.viewmodel.HomeViewModel
@@ -26,10 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-    private lateinit var rvCreators: RecyclerView
-    private val adapterCreators = CreatorListAdapter()
-    private lateinit var rvGenres: RecyclerView
-    private val adapterGenres = GenreListAdapter()
+    private lateinit var video: VideoView
     private lateinit var rvPopular: RecyclerView
     private val adapterPopular = GameListAdapter()
     private lateinit var rvTrending: RecyclerView
@@ -52,8 +50,6 @@ class HomeFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.findViewById<BottomNavigationView>(R.id.navigationView).visible()
 
-        setUpRecyclerViewCreators()
-        setUpRecyclerViewGenres()
         setUpRecyclerViewGamesPopular()
         setUpRecyclerViewGamesTrending()
         setUpRecyclerViewGamesLastYear()
@@ -63,64 +59,48 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    // Set up recycler view creators and adapter for section creators
-    private fun setUpRecyclerViewCreators() {
-
-        rvCreators = binding.incSectionCreators.rvCreator
-
-        homeViewModel.creators.observe(viewLifecycleOwner){ response ->
-            when (response) {
-                is RawgApiResult.Success -> {
-                    rvCreators.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                    rvCreators.adapter = adapterCreators
-                    adapterCreators.submitList(response.data?.result)
-                    binding.incSectionCreators.lySectionCreators.visible()
-                    binding.progressLoader.root.gone()
-                }
-                is RawgApiResult.Failure -> {
-                    binding.incSectionCreators.lySectionCreators.gone()
-                    binding.progressLoader.root.gone()
-                }
-                is RawgApiResult.ErrorThrowable -> {
-                    binding.incSectionCreators.lySectionCreators.gone()
-                    binding.progressLoader.root.gone()
-                }
-                is RawgApiResult.Loading -> {
-                    binding.incSectionCreators.lySectionCreators.gone()
-                    binding.progressLoader.root.visible()
-                }
-            }
+    // Set up the videoView with random url and volume controls
+    private fun setUpVideoView() {
+        val arrayVideos = arrayOf("https://media.rawg.io/media/stories/65f/65ff9214af64ca0c89abac55d80ed7ab.mp4",
+            "https://media.rawg.io/media/stories-640/17a/17ae7e8910249099275e1e3688bc1e37.mp4",
+            "https://media.rawg.io/media/stories-640/5c1/5c1914a7f914e849e3417f79e1dd2b71.mp4",
+            "https://media.rawg.io/media/stories-640/976/976316544d75b8db276ff5e4ca01e189.mp4",
+            "https://media.rawg.io/media/stories-640/e58/e58a4f95453d2bac7dde75f600d62c59.mp4",
+            "https://media.rawg.io/media/stories/e3c/e3c7fed123159b9bcfffad0454a0f87f.mp4",
+            "https://media.rawg.io/media/stories-640/6a1/6a153a00fd079483759a11187ee95b1b.mp4",
+            "https://media.rawg.io/media/stories-640/28e/28e5af04a0a66cb3b2ccc5cab2abaf09.mp4"
+        )
+        video = binding.videoViewHeader
+        video.setVideoURI(Uri.parse(arrayVideos.random().toString()))
+        video.requestFocus()
+        video.setOnPreparedListener { video.start() }
+        video.setOnCompletionListener {
+            video.setVideoURI(Uri.parse(arrayVideos.random().toString()))
+            video.start()
         }
+        binding.ivVolumeOn.visible()
+        volumeOn(requireContext())
+        setUpVolumeControls()
     }
 
-    // Set up recycler view genres and adapter for section genres
-    private fun setUpRecyclerViewGenres() {
-
-        rvGenres = binding.incSectionGenres.rvGenres
-
-        homeViewModel.genres.observe(viewLifecycleOwner){ response ->
-            when (response) {
-                is RawgApiResult.Success -> {
-                    rvGenres.layoutManager = ZoomRecyclerLayout(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                    rvGenres.adapter = adapterGenres
-                    adapterGenres.submitList(response.data?.result)
-                    binding.incSectionGenres.lySectionGenres.visible()
-                    binding.progressLoader.root.gone()
-                }
-                is RawgApiResult.Failure -> {
-                    binding.incSectionGenres.lySectionGenres.gone()
-                    binding.progressLoader.root.gone()
-                }
-                is RawgApiResult.ErrorThrowable -> {
-                    binding.incSectionGenres.lySectionGenres.gone()
-                    binding.progressLoader.root.gone()
-                }
-                is RawgApiResult.Loading -> {
-                    binding.incSectionGenres.lySectionGenres.gone()
-                    binding.progressLoader.root.visible()
-                }
-            }
-        }
+    // Set up the volume controls
+    private fun setUpVolumeControls() {
+       with(binding){
+           ivVolumeOn.setOnClickListener {
+               if (it.isVisible){
+                   volumeOff(requireContext())
+                   it.gone()
+                   ivVolumeOff.visible()
+               }
+           }
+           ivVolumeOff.setOnClickListener {
+               if (it.isVisible){
+                   volumeOn(requireContext())
+                   it.gone()
+                   ivVolumeOn.visible()
+               }
+           }
+       }
     }
 
     // Set up recycler view games popular and adapter for section games popular
@@ -138,6 +118,8 @@ class HomeFragment : Fragment() {
                     adapterPopular.isGamesTop = true
                     binding.incSectionGames.lySectionGames.visible()
                     binding.progressLoader.root.gone()
+                    // Activate the videoView of the presentation video
+                    setUpVideoView()
                 }
                 is RawgApiResult.Failure -> {
                     binding.incSectionGames.lySectionGames.gone()

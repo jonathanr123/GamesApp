@@ -2,6 +2,10 @@ package com.example.gamesapp.utils
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Context.AUDIO_SERVICE
+import android.graphics.Rect
+import android.media.AudioManager
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -23,6 +27,14 @@ fun View.visible(): View {
 fun View.gone(): View {
     this.visibility = View.GONE
     return this
+}
+
+fun View.isFullyVisible(scrollView: ScrollView) : Boolean {
+    val scrollBounds = Rect()
+    scrollView.getDrawingRect(scrollBounds)
+    val top = y
+    val bottom = top + height
+    return scrollBounds.top < top && scrollBounds.bottom > bottom
 }
 
 // Function for convert date with format yyyy-MM-dd to dd-MM-yyyy
@@ -83,4 +95,20 @@ fun showDialogScreenshot (screenshot: ShortScreenshot, context: Context) {
     val dialog = Dialog(context)
     dialog.setContentView(constraint)
     dialog.show()
+}
+
+// Function that turns on the sound of the phone
+fun volumeOn(context: Context) {
+    val manager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        manager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0)
+    }
+}
+
+// Function that mutes the phone
+fun volumeOff(context: Context) {
+    val manager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        manager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0)
+    }
 }
