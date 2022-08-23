@@ -60,6 +60,7 @@ class FavoritesFragment : Fragment() {
         favoritesViewModel.favoriteGames.observe(viewLifecycleOwner) { response ->
             rvFavorites.layoutManager = layoutManager
             rvFavorites.adapter = adapterFavorites
+            adapterFavorites.manager = parentFragmentManager
             adapterFavorites.submitList(response)
         }
     }

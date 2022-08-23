@@ -9,18 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.gamesapp.databinding.ItemGamesListBinding
 import com.example.gamesapp.domain.model.GamesItem
+import com.example.gamesapp.utils.showModalBottomSheetGames
 
 class FavoriteGameListAdapter : ListAdapter<GamesItem, RecyclerView.ViewHolder> (DiffUtilCallback()) {
 
-    private var onItemClicked: ((GamesItem) -> Unit)? = null
-    var isGamesTop: Boolean = false
-    var widthCard: Int = 180
-    var heightCard: Int = 250
+    private var widthCard: Int = 180
+    private var heightCard: Int = 250
     var manager: FragmentManager? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: ViewHolder = holder as ViewHolder
-        viewHolder.bind(getItem(position), onItemClicked, position, isGamesTop, widthCard, heightCard, manager)
+        viewHolder.bind(getItem(position), widthCard, heightCard, manager)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -37,9 +36,6 @@ class FavoriteGameListAdapter : ListAdapter<GamesItem, RecyclerView.ViewHolder> 
 
         internal fun bind(
             value: GamesItem,
-            listener: ((GamesItem) -> Unit)?,
-            position: Int,
-            isGamesTop: Boolean,
             widthCard: Int,
             heightCard: Int,
             manager: FragmentManager? = null
@@ -53,11 +49,9 @@ class FavoriteGameListAdapter : ListAdapter<GamesItem, RecyclerView.ViewHolder> 
                 ivGames.layoutParams.height =
                     (binding.root.context.resources.displayMetrics.density * heightCard).toInt()
 
-                /*
                 cardGames.setOnClickListener {
-                    showModalBottomSheetGames(value, binding.root.context, manager)
+                    showModalBottomSheetGames(value.toModel(), binding.root.context, manager)
                 }
-                 */
             }
         }
     }

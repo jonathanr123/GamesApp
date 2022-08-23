@@ -2,7 +2,9 @@ package com.example.gamesapp.data.model
 
 import com.example.gamesapp.data.database.entities.GamesEntity
 import com.example.gamesapp.domain.model.GamesItem
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
 import java.io.Serializable
 import java.util.*
 
@@ -20,10 +22,13 @@ data class Games(
     val shortScreenshots: List<ShortScreenshot>? = listOf(),
 ) : Serializable {
     fun toDatabase(): GamesEntity {
-        return GamesEntity(id = id, name = name, imageURL = imageURL)
+        val platformsString = Gson().toJson(platforms)
+        val genresString = Gson().toJson(genres)
+        val shortScreenshotsString = Gson().toJson(shortScreenshots)
+        return GamesEntity(id, name, metacritic, released, imageURL, rating, platformsString, genresString, shortScreenshotsString)
     }
     fun toDomain(): GamesItem {
-        return GamesItem(id = id, name = name, imageURL = imageURL)
+        return GamesItem(id, name, metacritic, released, imageURL, rating, platforms, genres, shortScreenshots)
     }
 }
 
