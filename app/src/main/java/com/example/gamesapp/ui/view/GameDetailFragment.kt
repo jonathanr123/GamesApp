@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.databinding.FragmentGameDetailBinding
 import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.ui.view.adapters.CreatorListAdapter
 import com.example.gamesapp.utils.*
 import com.example.gamesapp.ui.view.adapters.ScreenshotListAdapter
 import com.example.gamesapp.ui.viewmodel.GameDetailViewModel
@@ -29,6 +31,8 @@ class GameDetailFragment : Fragment() {
 
     private lateinit var rvScreenshot: RecyclerView
     private val adapterScreenshot = ScreenshotListAdapter()
+    private lateinit var rvCreators: RecyclerView
+    private val adapterCreators = CreatorListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,9 +57,12 @@ class GameDetailFragment : Fragment() {
             setUpView(response)
             setUpRecyclerViewScreenshots(response)
             gameDetailViewModel.fetchGameById(response.id)
+            gameDetailViewModel.fetchCreators(response.id)
         }
 
         setUpViewAdditional()
+
+        setUpRecyclerViewCreators()
 
         setUpClickListenerBtnFavorite()
 
@@ -149,6 +156,35 @@ class GameDetailFragment : Fragment() {
                     gameDetailViewModel.fetchGameById(gameDetailViewModel.gameSelected.value?.id!!)
                 }
                 is RawgApiResult.Loading -> {
+                }
+            }
+        }
+    }
+
+    // Set up recycler view creators and adapter for section Creators (Development team)
+    private fun setUpRecyclerViewCreators() {
+
+        rvCreators = binding.incSectionCreators.rvCreator
+        binding.incSectionCreators.tvTitleSectionCreators.gone()
+
+        gameDetailViewModel.creators.observe(viewLifecycleOwner){ response ->
+            when (response) {
+                is RawgApiResult.Success -> {
+                    rvCreators.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    rvCreators.adapter = adapterCreators
+                    adapterCreators.submitList(response.data?.result)
+                    binding.incSectionCreators.lySectionCreators.visible()
+                }
+                is RawgApiResult.Failure -> {
+                    gameDetailViewModel.fetchCreators(gameDetailViewModel.gameSelected.value?.id!!)
+                    binding.incSectionCreators.lySectionCreators.gone()
+                }
+                is RawgApiResult.ErrorThrowable -> {
+                    gameDetailViewModel.fetchCreators(gameDetailViewModel.gameSelected.value?.id!!)
+                    binding.incSectionCreators.lySectionCreators.gone()
+                }
+                is RawgApiResult.Loading -> {
+                    binding.incSectionCreators.lySectionCreators.gone()
                 }
             }
         }

@@ -35,7 +35,9 @@ class CreatorListAdapter : ListAdapter<Creators, RecyclerView.ViewHolder> (DiffU
             listener: ((Creators) -> Unit)?,
         ) {
             with(binding) {
-                ivCreator.load(value.imageURL)
+                if (!value.imageURL.isNullOrEmpty()){
+                    ivCreator.load(value.imageURL)
+                }
                 tvNameCreator.text = value.name
 
                 cvCreators.setOnClickListener {

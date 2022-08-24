@@ -16,8 +16,9 @@ interface RawgApiService {
     /**
      * Get a list of game creators.
      */
-    @GET("creators"+Constants.API_KEY)
+    @GET("games/{id}/development-team"+Constants.API_KEY)
     suspend fun getListOfGameCreators(
+        @Path("id") id: Int? = null,
         @Query("page") page: Int? = null,
         @Query("page_size") pageSize: Int? = null
     ): Response<RawgData<List<Creators>>>

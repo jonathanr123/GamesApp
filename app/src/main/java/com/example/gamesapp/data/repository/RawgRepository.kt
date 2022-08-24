@@ -16,9 +16,9 @@ import javax.inject.Inject
 
 class RawgRepository @Inject constructor(private val apiService: RawgApiService, private val db: GamesDB) {
 
-    // Get a list of games creators from the Rawg API
-    suspend fun getListOfGameCreators(): Flow<RawgApiResult<RawgData<List<Creators>>>> = flow {
-        val response = apiService.getListOfGameCreators()
+    // Get a list of creators of the game specific from the Rawg API
+    suspend fun getListOfGameCreators(id: Int?): Flow<RawgApiResult<RawgData<List<Creators>>>> = flow {
+        val response = apiService.getListOfGameCreators(id)
         when (response.isSuccessful) {
             true -> emit(RawgApiResult.Success(response.body()))
             false -> emit(RawgApiResult.Failure(response.code()))

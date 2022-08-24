@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gamesapp.data.model.Creators
 import com.example.gamesapp.data.model.GameSingle
 import com.example.gamesapp.data.model.Games
 import com.example.gamesapp.data.repository.RawgRepository
 import com.example.gamesapp.utils.RawgApiResult
+import com.example.gamesapp.utils.RawgData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -24,6 +26,10 @@ class GameDetailViewModel @Inject constructor(private val repository: RawgReposi
     private val _gameDetail: MutableLiveData<RawgApiResult<GameSingle>> =
         MutableLiveData(RawgApiResult.loading())
     val gameDetail: LiveData<RawgApiResult<GameSingle>> = _gameDetail
+
+    private val _creators: MutableLiveData<RawgApiResult<RawgData<List<Creators>>>> =
+        MutableLiveData(RawgApiResult.loading())
+    val creators: LiveData<RawgApiResult<RawgData<List<Creators>>>> = _creators
 
     private val _isFavorite: MutableLiveData<Boolean> = MutableLiveData()
     val isFavorite: LiveData<Boolean> = _isFavorite
@@ -52,6 +58,30 @@ class GameDetailViewModel @Inject constructor(private val repository: RawgReposi
 
                         is RawgApiResult.Loading ->
                             _gameDetail.postValue(RawgApiResult.loading())
+                    }
+                }
+        }
+    }
+
+    // Fetch creators (development team) from the repository and update live data with the result
+    fun fetchCreators(id: Int?) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getListOfGameCreators(id)
+                .catch { throwable ->
+                    _creators.postValue(RawgApiResult.errorThrowable(Exception(throwable.cause))) }
+                .collect { response ->
+                    when (response) {
+                        is RawgApiResult.Success ->
+                            _creators.postValue(RawgApiResult.success(response.data))
+
+                        is RawgApiResult.Failure ->
+                            _creators.postValue(RawgApiResult.failure(response.statusCode))
+
+                        is RawgApiResult.ErrorThrowable ->
+                            _creators.postValue(RawgApiResult.errorThrowable(response.errorThrowable))
+
+                        is RawgApiResult.Loading ->
+                            _creators.postValue(RawgApiResult.loading())
                     }
                 }
         }
