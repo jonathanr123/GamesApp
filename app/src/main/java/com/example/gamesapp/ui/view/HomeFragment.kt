@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import android.widget.VideoView
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -39,6 +40,9 @@ class HomeFragment : Fragment() {
     private lateinit var rvPublisherSpecific: RecyclerView
     private val adapterPublisherSpecific = GameListAdapter()
 
+    private lateinit var scroll: ScrollView
+    private var positionVideo: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +54,8 @@ class HomeFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.findViewById<BottomNavigationView>(R.id.navigationView).visible()
 
+        setUpScrollView()
+
         setUpRecyclerViewGamesPopular()
         setUpRecyclerViewGamesTrending()
         setUpRecyclerViewGamesLastYear()
@@ -57,6 +63,29 @@ class HomeFragment : Fragment() {
         setUpRecyclerViewGamesPublisherSpecific()
 
         return binding.root
+    }
+
+    /*
+    * Function that pauses or plays the presentation video depending on whether it is visible in
+    * the scrollview or not.
+     */
+    private fun setUpScrollView() {
+        scroll = binding.svHome
+        scroll.viewTreeObserver.addOnScrollChangedListener {
+            println("scroll" + scroll.scrollY)
+            val visible = binding.videoViewHeader.isPartiallyOrFullyVisible(scroll)
+            println("vista$visible")
+            if (!visible){
+                positionVideo = binding.videoViewHeader.currentPosition
+                binding.videoViewHeader.pause()
+            }else{
+                if (!binding.videoViewHeader.isPlaying) {
+                    binding.videoViewHeader.seekTo(positionVideo)
+                    binding.videoViewHeader.resume()
+
+                }
+            }
+        }
     }
 
     // Set up the videoView with random url and volume controls

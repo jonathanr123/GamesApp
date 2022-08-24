@@ -29,12 +29,36 @@ fun View.gone(): View {
     return this
 }
 
+// Check if the view is fully visible in a vertical scrollview
 fun View.isFullyVisible(scrollView: ScrollView) : Boolean {
     val scrollBounds = Rect()
     scrollView.getDrawingRect(scrollBounds)
     val top = y
     val bottom = top + height
     return scrollBounds.top < top && scrollBounds.bottom > bottom
+}
+
+// Check if the view is fully visible in a horizontal scrollview
+fun View.isFullyVisibleHorizontal(horizontalScrollView: HorizontalScrollView) : Boolean {
+    @Suppress("CanBeVal") var scrollBounds = Rect()
+    horizontalScrollView.getDrawingRect(scrollBounds)
+    val left = x
+    val right = left + width
+    return scrollBounds.left < left && scrollBounds.right > right
+}
+
+// Check if the view is partially/fully visible in a vertical scrollview
+fun View.isPartiallyOrFullyVisible(scrollView: ScrollView) : Boolean {
+    @Suppress("CanBeVal") var scrollBounds = Rect()
+    scrollView.getHitRect(scrollBounds)
+    return getLocalVisibleRect(scrollBounds)
+}
+
+// Check if the view is partially/fully visible in a horizontal scrollview
+fun View.isPartiallyOrFullyVisibleHorizontal(horizontalScrollView: HorizontalScrollView) : Boolean {
+    @Suppress("CanBeVal") var scrollBounds = Rect()
+    horizontalScrollView.getHitRect(scrollBounds)
+    return getLocalVisibleRect(scrollBounds)
 }
 
 // Function for convert date with format yyyy-MM-dd to dd-MM-yyyy
