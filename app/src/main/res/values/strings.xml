@@ -25,4 +25,7 @@
     <string name="search_game">Search game</string>
     <string name="tv_title_item_search">Title of Game</string>
     <string name="menu_videos">Trailers</string>
+    <string name="tv_description_media">Description of Game</string>
+    <string name="tv_title_media">Name of Game</string>
+    <string name="tv_genres_media">Genres of Game</string>
 </resources>

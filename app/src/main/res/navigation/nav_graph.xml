@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_search" />
 
     <fragment
+        android:id="@+id/videosFragment"
+        android:name="com.example.gamesapp.ui.view.VideosFragment"
+        android:label="fragment_videos"
+        tools:layout="@layout/fragment_videos" />
+
+    <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.gamesapp.ui.view.FavoritesFragment"
         android:label="fragment_favorites"

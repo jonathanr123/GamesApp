@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.VideosFragment">
+    android:background="@color/black"
+    tools:context=".ui.view.VideosFragment"
+    >
 
-    <TextView
+    <com.example.gamesapp.utils.ExoPlayerRecyclerView
+        android:id="@+id/exoPlayerRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:background="#dedede"
+        android:dividerHeight="8dp"
+        tools:ignore="MissingClass"
+        android:backgroundTint="@color/black"
+        android:paddingBottom="80dp"/>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
