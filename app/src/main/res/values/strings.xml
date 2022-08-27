@@ -24,4 +24,5 @@
     <string name="tv_website">websiteURL</string>
     <string name="search_game">Search game</string>
     <string name="tv_title_item_search">Title of Game</string>
+    <string name="menu_videos">Trailers</string>
 </resources>

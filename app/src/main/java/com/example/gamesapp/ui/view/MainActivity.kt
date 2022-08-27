@@ -48,6 +48,11 @@ class MainActivity : AppCompatActivity() {
                 changeFragment(SearchFragment())
             }
 
+            // Navigation to Videos fragment
+            R.id.menu_videos -> {
+                changeFragment(VideosFragment())
+            }
+
             // Navigation to Favorites fragment
             R.id.menu_favorites -> {
                 changeFragment(FavoritesFragment())
