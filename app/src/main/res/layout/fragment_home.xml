@@ -20,8 +20,8 @@
         android:id="@+id/sv_home"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/section_header"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section_header"
         tools:ignore="ScrollViewCount">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,40 +29,25 @@
             android:layout_height="wrap_content"
             android:paddingBottom="80dp">
 
-            <!-- Section Most Popular -->
-            <VideoView
+
+            <com.google.android.exoplayer2.ui.StyledPlayerView
                 android:id="@+id/videoView_header"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/iv_volume_on"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:id="@+id/iv_volume_control"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end|bottom"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
+                android:alpha="0"
                 android:animateLayoutChanges="true"
                 android:contentDescription="@string/content_description"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_volume_on"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/videoView_header"
-                app:layout_constraintEnd_toEndOf="@id/videoView_header" />
-
-            <ImageView
-                android:id="@+id/iv_volume_off"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="15dp"
-                android:animateLayoutChanges="true"
-                android:contentDescription="@string/content_description"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_volume_off"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/videoView_header"
                 app:layout_constraintEnd_toEndOf="@id/videoView_header" />
 

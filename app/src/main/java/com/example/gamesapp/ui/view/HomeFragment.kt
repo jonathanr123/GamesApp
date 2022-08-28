@@ -1,23 +1,24 @@
 package com.example.gamesapp.ui.view
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
-import android.widget.VideoView
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.ui.view.adapters.GameListAdapter
 import com.example.gamesapp.databinding.FragmentHomeBinding
 import com.example.gamesapp.utils.*
 import com.example.gamesapp.ui.viewmodel.HomeViewModel
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-    private lateinit var video: VideoView
+    private lateinit var video: ExoPlayer
     private lateinit var rvPopular: RecyclerView
     private val adapterPopular = GameListAdapter()
     private lateinit var rvTrending: RecyclerView
@@ -40,6 +41,7 @@ class HomeFragment : Fragment() {
     private lateinit var rvPublisherSpecific: RecyclerView
     private val adapterPublisherSpecific = GameListAdapter()
 
+    private lateinit var volumeState: VolumeState
     private lateinit var scroll: ScrollView
     private var positionVideo: Int = 0
 
@@ -79,12 +81,12 @@ class HomeFragment : Fragment() {
             val visible = binding.videoViewHeader.isPartiallyOrFullyVisible(scroll)
             println("vista$visible")
             if (!visible){
-                positionVideo = binding.videoViewHeader.currentPosition
-                binding.videoViewHeader.pause()
+                positionVideo = binding.videoViewHeader.player?.currentPosition?.toInt() ?: 0
+                binding.videoViewHeader.player?.pause()
             }else{
-                if (!binding.videoViewHeader.isPlaying) {
-                    binding.videoViewHeader.seekTo(positionVideo)
-                    binding.videoViewHeader.resume()
+                if (binding.videoViewHeader.player?.isPlaying == false) {
+                    binding.videoViewHeader.player?.seekTo(positionVideo.toLong())
+                    binding.videoViewHeader.player?.play()
 
                 }
             }
@@ -93,46 +95,68 @@ class HomeFragment : Fragment() {
 
     // Set up the videoView with random url and volume controls
     private fun setUpVideoView() {
-        val arrayVideos = arrayOf("https://media.rawg.io/media/stories/65f/65ff9214af64ca0c89abac55d80ed7ab.mp4",
-            "https://media.rawg.io/media/stories-640/17a/17ae7e8910249099275e1e3688bc1e37.mp4",
-            "https://media.rawg.io/media/stories-640/5c1/5c1914a7f914e849e3417f79e1dd2b71.mp4",
-            "https://media.rawg.io/media/stories-640/976/976316544d75b8db276ff5e4ca01e189.mp4",
-            "https://media.rawg.io/media/stories-640/e58/e58a4f95453d2bac7dde75f600d62c59.mp4",
-            "https://media.rawg.io/media/stories/e3c/e3c7fed123159b9bcfffad0454a0f87f.mp4",
-            "https://media.rawg.io/media/stories-640/6a1/6a153a00fd079483759a11187ee95b1b.mp4",
-            "https://media.rawg.io/media/stories-640/28e/28e5af04a0a66cb3b2ccc5cab2abaf09.mp4"
+        val arrayVideos: List<MediaItem> = listOf(
+            MediaItem.fromUri("https://media.rawg.io/media/stories/65f/65ff9214af64ca0c89abac55d80ed7ab.mp4"),
+            MediaItem.fromUri("https://media.rawg.io/media/stories-640/17a/17ae7e8910249099275e1e3688bc1e37.mp4"),
+            MediaItem.fromUri("https://media.rawg.io/media/stories-640/5c1/5c1914a7f914e849e3417f79e1dd2b71.mp4"),
+            MediaItem.fromUri("https://media.rawg.io/media/stories-640/976/976316544d75b8db276ff5e4ca01e189.mp4"),
+            MediaItem.fromUri("https://media.rawg.io/media/stories-640/e58/e58a4f95453d2bac7dde75f600d62c59.mp4"),
+            MediaItem.fromUri("https://media.rawg.io/media/stories/e3c/e3c7fed123159b9bcfffad0454a0f87f.mp4"),
+            MediaItem.fromUri("https://media.rawg.io/media/stories-640/6a1/6a153a00fd079483759a11187ee95b1b.mp4"),
+            MediaItem.fromUri("https://media.rawg.io/media/stories-640/28e/28e5af04a0a66cb3b2ccc5cab2abaf09.mp4")
         )
-        video = binding.videoViewHeader
-        video.setVideoURI(Uri.parse(arrayVideos.random().toString()))
-        video.requestFocus()
-        video.setOnPreparedListener { video.start() }
-        video.setOnCompletionListener {
-            video.setVideoURI(Uri.parse(arrayVideos.random().toString()))
-            video.start()
+        video = ExoPlayer.Builder(requireContext()).build()
+        video.setMediaItems(arrayVideos,true)
+        video.repeatMode = Player.REPEAT_MODE_ALL
+        video.shuffleModeEnabled = true
+        video.prepare()
+        video.play()
+        binding.videoViewHeader.player = video
+        binding.videoViewHeader.useController = false
+        binding.videoViewHeader.setOnClickListener { toggleVolume() }
+        setVolumeControl(VolumeState.ON)
+    }
+
+    /**
+     * Volume ENUM
+     */
+    private enum class VolumeState {
+        ON, OFF
+    }
+
+    private fun toggleVolume() {
+        if (volumeState == VolumeState.OFF) {
+            setVolumeControl(VolumeState.ON)
+        } else if (volumeState == VolumeState.ON) {
+            setVolumeControl(VolumeState.OFF)
         }
-        binding.ivVolumeOn.visible()
-        volumeOn(requireContext())
-        setUpVolumeControls()
     }
 
     // Set up the volume controls
-    private fun setUpVolumeControls() {
-       with(binding){
-           ivVolumeOn.setOnClickListener {
-               if (it.isVisible){
-                   volumeOff(requireContext())
-                   it.gone()
-                   ivVolumeOff.visible()
-               }
-           }
-           ivVolumeOff.setOnClickListener {
-               if (it.isVisible){
-                   volumeOn(requireContext())
-                   it.gone()
-                   ivVolumeOn.visible()
-               }
-           }
-       }
+    private fun setVolumeControl(state: VolumeState) {
+        volumeState = state
+        if (state == VolumeState.OFF) {
+            binding.videoViewHeader.player?.volume = 0f
+            animateVolumeControl()
+        } else if (state == VolumeState.ON) {
+            binding.videoViewHeader.player?.volume = 1f
+            animateVolumeControl()
+        }
+    }
+
+    // Animate the ivVolumeControl when is clicked
+    private fun animateVolumeControl() {
+        binding.ivVolumeControl.bringToFront()
+        if (volumeState == VolumeState.OFF) {
+            binding.ivVolumeControl.load(R.drawable.ic_volume_off)
+        } else if (volumeState == VolumeState.ON) {
+            binding.ivVolumeControl.load(R.drawable.ic_volume_on)
+        }
+        binding.ivVolumeControl.animate()?.cancel()
+        binding.ivVolumeControl.alpha = 1f
+        binding.ivVolumeControl.animate()
+            ?.alpha(0f)
+            ?.setDuration(600)?.startDelay = 1000
     }
 
     // Set up recycler view games popular and adapter for section games popular
@@ -151,7 +175,6 @@ class HomeFragment : Fragment() {
                     binding.incSectionGames.lySectionGames.visible()
                     binding.progressLoader.root.gone()
                     // Activate the videoView of the presentation video
-                    setUpVideoView()
                 }
                 is RawgApiResult.Failure -> {
                     binding.incSectionGames.lySectionGames.gone()
@@ -307,6 +330,26 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.videoViewHeader.player?.release()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.videoViewHeader.player?.release()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setUpVideoView()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.videoViewHeader.player?.release()
     }
 
 }
