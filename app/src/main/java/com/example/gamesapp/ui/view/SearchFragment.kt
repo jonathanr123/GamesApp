@@ -49,6 +49,11 @@ class SearchFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.findViewById<BottomNavigationView>(R.id.navigationView).visible()
 
+        // Set Up Toolbar
+        activity.supportActionBar?.show()
+        activity.supportActionBar?.title = "Search"
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         viewLifecycleOwner.lifecycleScope.launch {
             setUpRecyclerViewAllGames()
         }

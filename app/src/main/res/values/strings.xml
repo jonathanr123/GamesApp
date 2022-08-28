@@ -28,4 +28,5 @@
     <string name="tv_description_media">Description of Game</string>
     <string name="tv_title_media">Name of Game</string>
     <string name="tv_genres_media">Genres of Game</string>
+    <string name="tv_title_section">Title of section</string>
 </resources>

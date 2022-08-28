@@ -54,6 +54,9 @@ class HomeFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.findViewById<BottomNavigationView>(R.id.navigationView).visible()
 
+        // Set Up Toolbar
+        activity.supportActionBar?.hide()
+
         setUpScrollView()
 
         setUpRecyclerViewGamesPopular()

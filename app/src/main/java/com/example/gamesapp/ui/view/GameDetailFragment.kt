@@ -45,6 +45,11 @@ class GameDetailFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.findViewById<BottomNavigationView>(R.id.navigationView).gone()
 
+        // Set Up Toolbar
+        activity.supportActionBar?.show()
+        activity.supportActionBar?.title = "Game Details"
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // Received game from previous fragment and set it to view model
         setFragmentResultListener("game_detail") { _, bundle ->
             gameReceived = bundle.getSerializable("game") as Games?

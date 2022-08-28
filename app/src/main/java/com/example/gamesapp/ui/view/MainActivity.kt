@@ -3,7 +3,6 @@ package com.example.gamesapp.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import com.example.gamesapp.R
 import com.example.gamesapp.databinding.ActivityMainBinding
@@ -16,15 +15,15 @@ class MainActivity : AppCompatActivity() {
     // Properties
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavView: BottomNavigationView
-    private lateinit var toolbar: ActionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        toolbar = supportActionBar!!
-        toolbar.hide()
+        // Set Up Toolbar
+        setSupportActionBar(binding.toolbar.toolbar)
+
         bottomNavView = binding.navigationView
 
         // Set up the bottom navigation view
@@ -64,6 +63,13 @@ class MainActivity : AppCompatActivity() {
     private fun changeFragment(frag: Fragment){
         val fragment = supportFragmentManager.beginTransaction()
         fragment.replace(R.id.fragmentContainerView,frag).commit()
+    }
+
+    // Override the function when clicking the back arrow of the toolbar
+    override fun onSupportNavigateUp(): Boolean {
+        super.onSupportNavigateUp()
+        onBackPressed()
+        return false
     }
 
 }

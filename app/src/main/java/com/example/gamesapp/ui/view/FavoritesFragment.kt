@@ -14,6 +14,7 @@ import com.example.gamesapp.R
 import com.example.gamesapp.databinding.FragmentFavoritesBinding
 import com.example.gamesapp.ui.view.adapters.FavoriteGameListAdapter
 import com.example.gamesapp.ui.viewmodel.FavoritesViewModel
+import com.example.gamesapp.utils.gone
 import com.example.gamesapp.utils.visible
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,11 @@ class FavoritesFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.findViewById<BottomNavigationView>(R.id.navigationView).visible()
 
+        // Set Up Toolbar
+        activity.supportActionBar?.show()
+        activity.supportActionBar?.title = "Favorites"
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         setUpRecyclerViewFavoriteGames()
 
         return binding.root
@@ -48,7 +54,7 @@ class FavoritesFragment : Fragment() {
     private fun setUpRecyclerViewFavoriteGames() {
 
         favoritesViewModel.fetchFavoriteGames()
-        binding.incSectionFavorites.tvTitleSectionGames.text = "Favorites games"
+        binding.incSectionFavorites.tvTitleSectionGames.gone()
         rvFavorites = binding.incSectionFavorites.rvGames
         val layoutManager =
             if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {

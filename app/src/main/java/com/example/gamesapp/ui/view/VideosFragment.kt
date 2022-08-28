@@ -40,6 +40,11 @@ class VideosFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.findViewById<BottomNavigationView>(R.id.navigationView).visible()
 
+        // Set Up Toolbar
+        activity.supportActionBar?.show()
+        activity.supportActionBar?.title = "New and Popular"
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         // Prepare demo content
         prepareVideoList()
 
