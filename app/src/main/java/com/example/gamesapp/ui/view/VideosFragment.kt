@@ -64,7 +64,7 @@ class VideosFragment : Fragment() {
 
         // Set Adapter
         rvVideos.adapter = adapterVideos
-        rvVideos.smoothScrollToPosition(1)
+        rvVideos.smoothScrollToPosition(0)
     }
 
     override fun onDestroy() {
