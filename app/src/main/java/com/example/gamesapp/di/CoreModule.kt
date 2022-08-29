@@ -1,6 +1,7 @@
-package com.example.gamesapp.core
+package com.example.gamesapp.di
 
 import android.content.Context
+import com.example.gamesapp.core.ResourcesProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

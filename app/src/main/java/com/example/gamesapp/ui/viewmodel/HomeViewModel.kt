@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gamesapp.core.DataStoreManager
 import com.example.gamesapp.data.model.Games
 import com.example.gamesapp.data.repository.RawgRepository
 import com.example.gamesapp.utils.RawgApiResult
@@ -17,7 +18,7 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: RawgRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: RawgRepository, private val dataStore: DataStoreManager) : ViewModel() {
 
     // LiveData to observe the state of the response from the repository and update the UI
     private val _gamesPopular: MutableLiveData<RawgApiResult<RawgData<List<Games>>>> =
@@ -40,12 +41,16 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
         MutableLiveData(RawgApiResult.loading())
     val gamesPublisherSpecific: LiveData<RawgApiResult<RawgData<List<Games>>>> = _gamesPublisherSpecific
 
+    private val _username: MutableLiveData<String> = MutableLiveData("")
+    val username: LiveData<String> = _username
+
     init {
         fetchGamesPopular()
         fetchGamesTrending()
         fetchGamesLastYear()
         fetchGamesTagSpecific()
         fetchGamesPublisherSpecific()
+        getUserName()
     }
 
     // Fetch games popular from the repository and update live data with the result
@@ -170,6 +175,22 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository) 
                             _gamesPublisherSpecific.postValue(RawgApiResult.loading())
                     }
                 }
+        }
+    }
+
+    // Save the username in the Datastore and call getUserName() function
+    fun saveUsername(username: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStore.saveDS("name", username)
+            getUserName()
+        }
+    }
+
+    // Get the username and update live data with the result
+    private fun getUserName(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val name = dataStore.getDS("name", "")
+            _username.postValue(name)
         }
     }
 

@@ -20,15 +20,17 @@
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/ic_volume_off.xml" value="0.1645" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/ic_volume_on.xml" value="0.1645" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/rounded_dialog.xml" value="0.1645" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/shape_dialog.xml" value="0.119" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/shape_search.xml" value="0.1645" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/shape_video.xml" value="0.1195" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/font/asap_regular.xml" value="0.215625" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout-v26/fragment_game_detail.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/bottom_sheet.xml" value="0.33" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/dialog_username.xml" value="0.22" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_favorites.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_game_detail.xml" value="0.25" />
-        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_home.xml" value="0.18710832587287377" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/fragment_videos.xml" value="0.1" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/item_creator_list.xml" value="0.67" />
@@ -42,6 +44,7 @@
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/section_genres.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/section_header.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/section_header_main.xml" value="0.22" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/shape_dialog.xml" value="0.1" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/toolbar.xml" value="0.1" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/view_load_spinner.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/view_shimmer_loading_home.xml" value="0.18645833333333334" />

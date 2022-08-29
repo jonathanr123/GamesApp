@@ -29,4 +29,7 @@
     <string name="tv_title_media">Name of Game</string>
     <string name="tv_genres_media">Genres of Game</string>
     <string name="tv_title_section">Title of section</string>
+    <string name="tv_title_dialog">Hello, what\'s your name?</string>
+    <string name="input_username_dialog">Username</string>
+    <string name="button_dialog">Confirm</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.example.gamesapp.ui.view
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +23,8 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,6 +50,8 @@ class HomeFragment : Fragment() {
     private lateinit var scroll: ScrollView
     private var positionVideo: Int = 0
 
+    private val dialog: Dialog by lazy { showDialog() }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +66,7 @@ class HomeFragment : Fragment() {
         // Set Up Toolbar
         activity.supportActionBar?.hide()
 
+        setUpWelcomeUsername()
         setUpScrollView()
 
         setUpRecyclerViewGamesPopular()
@@ -68,6 +76,36 @@ class HomeFragment : Fragment() {
         setUpRecyclerViewGamesPublisherSpecific()
 
         return binding.root
+    }
+
+    // Set up Dialog with the question about username
+    @SuppressLint("InflateParams")
+    private fun showDialog(): Dialog {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(layoutInflater.inflate(R.layout.dialog_username, null))
+        val inputUsername = dialog.findViewById(R.id.input_username_dialog) as TextInputEditText
+        val button = dialog.findViewById(R.id.button_dialog) as MaterialButton
+        button.setOnClickListener {
+            homeViewModel.saveUsername(inputUsername.text.toString())
+            dialog.cancel()
+        }
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+        return dialog
+    }
+
+    // Set the header section with the username
+    @SuppressLint("SetTextI18n")
+    private fun setUpWelcomeUsername() {
+        homeViewModel.username.observe(viewLifecycleOwner) { response ->
+            if (response != ""){
+                binding.sectionHeader.tvSubtitleSectionHeader.text = "$response!"
+                dialog.cancel()
+            } else {
+                binding.sectionHeader.tvSubtitleSectionHeader.text = ""
+                dialog.show()
+            }
+        }
     }
 
     /*
