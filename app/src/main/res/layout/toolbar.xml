@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:background="@color/black"
     app:titleTextColor="@color/gold"
-    app:title="@string/tv_title_section">
+    app:title="@string/tv_title_section"
+    app:navigationIcon="@drawable/ic_arrow_back">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile_header"

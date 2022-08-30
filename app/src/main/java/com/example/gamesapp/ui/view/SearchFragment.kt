@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -53,6 +55,8 @@ class SearchFragment : Fragment() {
         activity.supportActionBar?.show()
         activity.supportActionBar?.title = "Search"
         activity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        activity.supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.color.black))
+        activity.findViewById<Toolbar>(R.id.toolbar).setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.gold))
 
         viewLifecycleOwner.lifecycleScope.launch {
             setUpRecyclerViewAllGames()
