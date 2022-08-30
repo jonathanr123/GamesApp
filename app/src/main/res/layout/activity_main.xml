@@ -42,6 +42,8 @@
         android:layout_height="wrap_content"
         android:background="#131313"
         app:itemIconSize="30dp"
+        app:itemIconTint="@color/gold"
+        app:itemTextColor="@color/gold"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_scrollFlags="scroll|enterAlways"

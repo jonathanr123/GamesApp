@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/black"
-    app:titleTextColor="@color/white"
+    app:titleTextColor="@color/gold"
     app:title="@string/tv_title_section">
 
     <de.hdodenhof.circleimageview.CircleImageView

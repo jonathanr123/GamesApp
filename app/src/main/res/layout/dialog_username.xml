@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/mazzardl_extrabold"
             android:text="@string/tv_title_dialog"
-            android:textColor="@color/white"
+            android:textColor="@color/gold"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
