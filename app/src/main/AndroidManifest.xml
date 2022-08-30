@@ -17,7 +17,11 @@
         android:theme="@style/Theme.GamesApp"
         tools:targetApi="n">
         <activity
-            android:name="com.example.gamesapp.ui.view.MainActivity"
+            android:name=".ui.view.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.SplashActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>

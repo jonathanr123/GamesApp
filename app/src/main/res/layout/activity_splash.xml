@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.SplashActivity"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/content_description"
+        android:src="@drawable/title_logo"
+        app:layout_constraintBottom_toTopOf="@+id/iv_characters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_characters"
+        android:layout_width="350dp"
+        android:layout_height="470dp"
+        android:contentDescription="@string/content_description"
+        android:src="@drawable/characters_splash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="350dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="270dp"
+        android:contentDescription="@string/content_description"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_characters" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
