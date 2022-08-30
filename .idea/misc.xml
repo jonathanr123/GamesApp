@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1195" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/black_gradient.xml" value="0.1495" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/blue_gradient.xml" value="0.1765" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/drawable/blue_ligth_gradient.xml" value="0.1765" />
@@ -50,6 +51,7 @@
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/view_load_spinner.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/layout/view_shimmer_loading_home.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/menu/navigation.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1195" />
         <entry key="..\:/Users/Jonathan/Documents/Familia/Jonathan/Proyectos/GamesApp/app/src/main/res/xml/network_security_config.xml" value="0.15220179563916203" />
       </map>
     </option>
