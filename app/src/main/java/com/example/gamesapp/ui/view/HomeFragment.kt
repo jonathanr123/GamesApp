@@ -26,6 +26,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -66,6 +70,7 @@ class HomeFragment : Fragment() {
         // Set Up Toolbar
         activity.supportActionBar?.hide()
 
+        setUpSwipeRefresh()
         setUpWelcomeUsername()
         setUpScrollView()
 
@@ -76,6 +81,19 @@ class HomeFragment : Fragment() {
         setUpRecyclerViewGamesPublisherSpecific()
 
         return binding.root
+    }
+
+    // Set up Swipe Refresh component
+    private fun setUpSwipeRefresh() {
+       setColorSwipe(requireContext(), binding.swipeRefreshHome)
+        binding.swipeRefreshHome.setOnRefreshListener {
+            binding.swipeRefreshHome.isRefreshing = true
+            homeViewModel.refreshLayout()
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(4000)
+                binding.swipeRefreshHome.isRefreshing = false
+            }
+        }
     }
 
     // Set up Dialog with the question about username
@@ -382,7 +400,23 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        setUpVideoView()
+        homeViewModel.gamesPopular.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is RawgApiResult.Success -> {
+                    setUpVideoView()
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Failure -> {
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.ErrorThrowable -> {
+                    binding.progressLoader.root.gone()
+                }
+                is RawgApiResult.Loading -> {
+                    binding.progressLoader.root.visible()
+                }
+            }
+        }
     }
 
     override fun onDestroy() {

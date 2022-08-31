@@ -7,97 +7,92 @@
     android:background="@color/black"
     tools:context=".ui.view.SearchFragment">
 
-    <ScrollView
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/sv_search_game"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="ScrollViewCount">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/shape_search"
+        android:fontFamily="@font/mazzardl_medium"
+        android:hint="@string/search_game"
+        android:imeOptions="actionDone"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/content_description"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@+id/sv_search_game"
+        app:layout_constraintStart_toStartOf="@+id/sv_search_game"
+        app:layout_constraintTop_toTopOf="@+id/sv_search_game" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/iv_search_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:contentDescription="@string/content_description"
+        android:focusable="true"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sv_search_game"
+        app:layout_constraintEnd_toEndOf="@+id/sv_search_game"
+        app:layout_constraintTop_toTopOf="@+id/sv_search_game"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_close" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_search_game">
+
+        <!-- Section Games -->
+        <include
+            android:id="@+id/inc_section_games"
+            layout="@layout/section_games"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="80dp">
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/sv_search_game"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="12dp"
-                android:background="@drawable/shape_search"
-                android:fontFamily="@font/mazzardl_medium"
-                android:hint="@string/search_game"
-                android:imeOptions="actionDone"
-                android:paddingHorizontal="40dp"
-                android:paddingVertical="10dp"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlSymmetry" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="8dp"
-                android:contentDescription="@string/content_description"
-                android:src="@drawable/ic_search"
-                app:layout_constraintBottom_toBottomOf="@+id/sv_search_game"
-                app:layout_constraintStart_toStartOf="@+id/sv_search_game"
-                app:layout_constraintTop_toTopOf="@+id/sv_search_game" />
+    <!-- Section Search RecyclerView-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search_games"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/sv_search_game"
+        tools:listitem="@layout/item_search_list" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/iv_search_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:clickable="true"
-                android:contentDescription="@string/content_description"
-                android:focusable="true"
-                android:visibility="gone"
-                app:cardBackgroundColor="@color/black"
-                app:cardCornerRadius="25dp"
-                app:layout_constraintBottom_toBottomOf="@+id/sv_search_game"
-                app:layout_constraintEnd_toEndOf="@+id/sv_search_game"
-                app:layout_constraintTop_toTopOf="@+id/sv_search_game"
-                tools:visibility="visible">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_close" />
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Section Games -->
-            <include
-                android:id="@+id/inc_section_games"
-                layout="@layout/section_games"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sv_search_game" />
-
-            <!-- Section Search RecyclerView-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_search_games"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/sv_search_game"
-                tools:listitem="@layout/item_search_list" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

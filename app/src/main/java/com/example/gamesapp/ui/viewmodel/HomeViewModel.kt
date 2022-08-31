@@ -194,4 +194,12 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository, 
         }
     }
 
+    fun refreshLayout(){
+        fetchGamesPopular()
+        fetchGamesTrending()
+        fetchGamesLastYear()
+        fetchGamesTagSpecific()
+        fetchGamesPublisherSpecific()
+    }
+
 }

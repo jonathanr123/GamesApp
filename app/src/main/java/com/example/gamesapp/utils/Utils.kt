@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.data.model.Games
@@ -135,4 +137,13 @@ fun volumeOff(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         manager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0)
     }
+}
+
+// Set Color progress bar in the Swipe Layout
+fun setColorSwipe (context: Context, swipe: SwipeRefreshLayout) {
+    val colorGold = ContextCompat.getColor(context,R.color.gold)
+    val colorBlue = ContextCompat.getColor(context,R.color.blue_500)
+    val colorPurple = ContextCompat.getColor(context,R.color.purple_200)
+    val colorBlack = ContextCompat.getColor(context,R.color.black)
+    swipe.setColorSchemeColors(colorGold, colorBlue,colorBlack, colorPurple)
 }

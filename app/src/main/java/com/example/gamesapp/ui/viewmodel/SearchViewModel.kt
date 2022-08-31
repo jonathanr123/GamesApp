@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.gamesapp.data.model.Games
 import com.example.gamesapp.data.repository.RawgRepository
@@ -13,7 +14,7 @@ import com.example.gamesapp.utils.RawgApiResult
 import com.example.gamesapp.utils.RawgData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -26,11 +27,13 @@ class SearchViewModel @Inject constructor(private val repository: RawgRepository
         MutableLiveData(RawgApiResult.loading())
     val gamesSearch: LiveData<RawgApiResult<RawgData<List<Games>>>> = _gamesSearch
 
+    private val _allGames: MutableStateFlow<Flow<PagingData<Games>>> = MutableStateFlow(flowOf(PagingData.empty()))
     // flow for paging games list from repository
-    val allGames = Pager( PagingConfig(pageSize = 40) ) {
-        repository.getAllGames()
-    }.flow
-        .cachedIn(viewModelScope)
+    val allGames: StateFlow<Flow<PagingData<Games>>> = _allGames
+
+    init {
+        fetchAllGames()
+    }
 
     // Fetch games searched by name from repository and update livedata with result
     fun fetchGamesByName(nameSearch:String? = null) {
@@ -55,6 +58,17 @@ class SearchViewModel @Inject constructor(private val repository: RawgRepository
                     }
                 }
         }
+    }
+
+    private fun fetchAllGames(){
+        _allGames.value = Pager( PagingConfig(pageSize = 40) ) {
+            repository.getAllGames()
+        }.flow
+            .cachedIn(viewModelScope)
+    }
+
+    fun refreshLayout(){
+        fetchAllGames()
     }
 
 }

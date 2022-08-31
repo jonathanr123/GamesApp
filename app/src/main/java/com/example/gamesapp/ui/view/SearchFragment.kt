@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,9 +24,13 @@ import com.example.gamesapp.utils.visible
 import com.example.gamesapp.ui.view.adapters.AllGamesListAdapter
 import com.example.gamesapp.ui.view.adapters.SearchListAdapter
 import com.example.gamesapp.ui.viewmodel.SearchViewModel
+import com.example.gamesapp.utils.setColorSwipe
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -79,11 +85,26 @@ class SearchFragment : Fragment() {
             }
         })
 
+        setUpSwipeRefresh()
+
         setUpSearchView()
 
         setUpRecyclerViewGamesSearch()
 
         return binding.root
+    }
+
+    // Set up Swipe Refresh component
+    private fun setUpSwipeRefresh() {
+        setColorSwipe(requireContext(), binding.swipeRefreshHome)
+        binding.swipeRefreshHome.setOnRefreshListener {
+            binding.swipeRefreshHome.isRefreshing = true
+            searchViewModel.refreshLayout()
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(4000)
+                binding.swipeRefreshHome.isRefreshing = false
+            }
+        }
     }
 
     // Set up recycler view for all games list
@@ -99,8 +120,10 @@ class SearchFragment : Fragment() {
         rvAllGames.layoutManager = layoutManager
         rvAllGames.adapter = adapterAllGames
         adapterAllGames.manager = parentFragmentManager
-        searchViewModel.allGames.collectLatest { pagingData ->
-            adapterAllGames.submitData(pagingData)
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
+            searchViewModel.allGames.collect { pagingData ->
+                adapterAllGames.submitData(pagingData.first())
+            }
         }
     }
 
