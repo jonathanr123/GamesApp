@@ -88,6 +88,7 @@ class HomeFragment : Fragment() {
        setColorSwipe(requireContext(), binding.swipeRefreshHome)
         binding.swipeRefreshHome.setOnRefreshListener {
             binding.swipeRefreshHome.isRefreshing = true
+            binding.videoViewHeader.player?.release()
             homeViewModel.refreshLayout()
             CoroutineScope(Dispatchers.Main).launch {
                 delay(4000)
