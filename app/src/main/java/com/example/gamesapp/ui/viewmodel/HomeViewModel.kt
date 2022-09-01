@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.gamesapp.core.DataStoreManager
 import com.example.gamesapp.data.model.Games
 import com.example.gamesapp.data.repository.RawgRepository
+import com.example.gamesapp.domain.model.UserProfileItem
 import com.example.gamesapp.utils.RawgApiResult
 import com.example.gamesapp.utils.RawgData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,8 +42,8 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository, 
         MutableLiveData(RawgApiResult.loading())
     val gamesPublisherSpecific: LiveData<RawgApiResult<RawgData<List<Games>>>> = _gamesPublisherSpecific
 
-    private val _username: MutableLiveData<String> = MutableLiveData("")
-    val username: LiveData<String> = _username
+    private val _userProfile: MutableLiveData<UserProfileItem> = MutableLiveData(null)
+    val userProfile: LiveData<UserProfileItem> = _userProfile
 
     init {
         fetchGamesPopular()
@@ -50,7 +51,7 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository, 
         fetchGamesLastYear()
         fetchGamesTagSpecific()
         fetchGamesPublisherSpecific()
-        getUserName()
+        getUserProfile()
     }
 
     // Fetch games popular from the repository and update live data with the result
@@ -178,19 +179,25 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository, 
         }
     }
 
-    // Save the username in the Datastore and call getUserName() function
-    fun saveUsername(username: String){
+    // Save the attributes of UserProfile in the Datastore and call getUserName() function
+    fun saveUserProfile(username: String, sex: String){
         viewModelScope.launch(Dispatchers.IO) {
-            dataStore.saveDS("name", username)
-            getUserName()
+            dataStore.saveDS("username", username)
+            dataStore.saveDS("sex", sex)
+            getUserProfile()
         }
     }
 
-    // Get the username and update live data with the result
-    private fun getUserName(){
+    // Get the attributes of UserProfile and update live data with the result
+    private fun getUserProfile(){
         viewModelScope.launch(Dispatchers.IO) {
-            val name = dataStore.getDS("name", "")
-            _username.postValue(name)
+            val usernameDS = dataStore.getDS("username", "")
+            val sexDS = dataStore.getDS("sex", "")
+            val user = UserProfileItem(
+                username = usernameDS,
+                sex = sexDS
+            )
+            _userProfile.postValue(user)
         }
     }
 

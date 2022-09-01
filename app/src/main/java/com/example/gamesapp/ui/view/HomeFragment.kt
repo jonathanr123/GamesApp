@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
+import android.widget.*
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -71,7 +73,7 @@ class HomeFragment : Fragment() {
         activity.supportActionBar?.hide()
 
         setUpSwipeRefresh()
-        setUpWelcomeUsername()
+        setUpHeader()
         setUpScrollView()
 
         setUpRecyclerViewGamesPopular()
@@ -103,9 +105,15 @@ class HomeFragment : Fragment() {
         val dialog = Dialog(requireContext())
         dialog.setContentView(layoutInflater.inflate(R.layout.dialog_username, null))
         val inputUsername = dialog.findViewById(R.id.input_username_dialog) as TextInputEditText
+        val r1 = dialog.findViewById(R.id.radio_button_man) as RadioButton
+        val r2 = dialog.findViewById(R.id.radio_button_woman) as RadioButton
         val button = dialog.findViewById(R.id.button_dialog) as MaterialButton
         button.setOnClickListener {
-            homeViewModel.saveUsername(inputUsername.text.toString())
+            if (r1.isChecked) {
+                homeViewModel.saveUserProfile(inputUsername.text.toString(), "M")
+            } else if (r2.isChecked) {
+                homeViewModel.saveUserProfile(inputUsername.text.toString(), "F")
+            }
             dialog.cancel()
         }
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -113,15 +121,20 @@ class HomeFragment : Fragment() {
         return dialog
     }
 
-    // Set the header section with the username
+    // Set up header section with the username and avatar
     @SuppressLint("SetTextI18n")
-    private fun setUpWelcomeUsername() {
-        homeViewModel.username.observe(viewLifecycleOwner) { response ->
-            if (response != ""){
-                binding.sectionHeader.tvSubtitleSectionHeader.text = "$response!"
+    private fun setUpHeader() {
+        homeViewModel.userProfile.observe(viewLifecycleOwner) { response ->
+            if ( response?.username != ""){
+                binding.sectionHeader.tvSubtitleSectionHeader.text = "${response?.username} !"
+                val image = if (response?.sex == "M")  R.drawable.profile_pic else  R.drawable.profile_pic_women
+                binding.sectionHeader.ivProfileHeader.load(image)
+                activity?.findViewById<Toolbar>(R.id.toolbar)?.findViewById<CircleImageView>(R.id.iv_profile_header)?.load(image)
+                binding.sectionHeader.ivProfileHeader.visible()
                 dialog.cancel()
             } else {
                 binding.sectionHeader.tvSubtitleSectionHeader.text = ""
+                binding.sectionHeader.ivProfileHeader.gone()
                 dialog.show()
             }
         }
