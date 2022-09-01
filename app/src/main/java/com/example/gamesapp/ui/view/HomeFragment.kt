@@ -138,6 +138,10 @@ class HomeFragment : Fragment() {
                 dialog.show()
             }
         }
+
+        binding.sectionHeader.ivProfileHeader.setOnClickListener {
+            homeViewModel.clearUserProfile()
+        }
     }
 
     /*

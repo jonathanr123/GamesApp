@@ -61,6 +61,8 @@
         android:scaleType="centerCrop"
         android:src="@drawable/profile_pic"
         android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

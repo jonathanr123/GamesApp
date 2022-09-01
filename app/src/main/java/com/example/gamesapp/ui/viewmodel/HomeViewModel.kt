@@ -179,7 +179,7 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository, 
         }
     }
 
-    // Save the attributes of UserProfile in the Datastore and call getUserName() function
+    // Save the attributes of UserProfile in the Datastore and call getUserProfile() function
     fun saveUserProfile(username: String, sex: String){
         viewModelScope.launch(Dispatchers.IO) {
             dataStore.saveDS("username", username)
@@ -198,6 +198,14 @@ class HomeViewModel @Inject constructor(private val repository: RawgRepository, 
                 sex = sexDS
             )
             _userProfile.postValue(user)
+        }
+    }
+
+    // Clear the attributes of UserProfile from the Datastore and call getUserProfile() function
+    fun clearUserProfile(){
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStore.clearDS()
+            getUserProfile()
         }
     }
 
