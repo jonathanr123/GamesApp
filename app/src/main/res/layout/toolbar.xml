@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    app:titleTextColor="@color/gold"
+    app:title="@string/tv_title_section"
+    app:navigationIcon="@drawable/ic_arrow_back">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profile_header"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginEnd="15dp"
+        android:adjustViewBounds="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile_pic"
+        android:layout_gravity="end"/>
+
+</androidx.appcompat.widget.Toolbar>

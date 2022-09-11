@@ -2,17 +2,23 @@ package com.example.gamesapp.utils
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Context.AUDIO_SERVICE
+import android.graphics.Rect
+import android.media.AudioManager
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.example.gamesapp.R
-import com.example.gamesapp.model.Games
-import com.example.gamesapp.model.ShortScreenshot
-import com.example.gamesapp.view.GameDetailFragment
+import com.example.gamesapp.data.model.Games
+import com.example.gamesapp.data.model.ShortScreenshot
+import com.example.gamesapp.ui.view.GameDetailFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 fun View.visible(): View {
@@ -23,6 +29,38 @@ fun View.visible(): View {
 fun View.gone(): View {
     this.visibility = View.GONE
     return this
+}
+
+// Check if the view is fully visible in a vertical scrollview
+fun View.isFullyVisible(scrollView: ScrollView) : Boolean {
+    val scrollBounds = Rect()
+    scrollView.getDrawingRect(scrollBounds)
+    val top = y
+    val bottom = top + height
+    return scrollBounds.top < top && scrollBounds.bottom > bottom
+}
+
+// Check if the view is fully visible in a horizontal scrollview
+fun View.isFullyVisibleHorizontal(horizontalScrollView: HorizontalScrollView) : Boolean {
+    @Suppress("CanBeVal") var scrollBounds = Rect()
+    horizontalScrollView.getDrawingRect(scrollBounds)
+    val left = x
+    val right = left + width
+    return scrollBounds.left < left && scrollBounds.right > right
+}
+
+// Check if the view is partially/fully visible in a vertical scrollview
+fun View.isPartiallyOrFullyVisible(scrollView: ScrollView) : Boolean {
+    @Suppress("CanBeVal") var scrollBounds = Rect()
+    scrollView.getHitRect(scrollBounds)
+    return getLocalVisibleRect(scrollBounds)
+}
+
+// Check if the view is partially/fully visible in a horizontal scrollview
+fun View.isPartiallyOrFullyVisibleHorizontal(horizontalScrollView: HorizontalScrollView) : Boolean {
+    @Suppress("CanBeVal") var scrollBounds = Rect()
+    horizontalScrollView.getHitRect(scrollBounds)
+    return getLocalVisibleRect(scrollBounds)
 }
 
 // Function for convert date with format yyyy-MM-dd to dd-MM-yyyy
@@ -83,4 +121,29 @@ fun showDialogScreenshot (screenshot: ShortScreenshot, context: Context) {
     val dialog = Dialog(context)
     dialog.setContentView(constraint)
     dialog.show()
+}
+
+// Function that turns on the sound of the phone
+fun volumeOn(context: Context) {
+    val manager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        manager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0)
+    }
+}
+
+// Function that mutes the phone
+fun volumeOff(context: Context) {
+    val manager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        manager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0)
+    }
+}
+
+// Set Color progress bar in the Swipe Layout
+fun setColorSwipe (context: Context, swipe: SwipeRefreshLayout) {
+    val colorGold = ContextCompat.getColor(context,R.color.gold)
+    val colorBlue = ContextCompat.getColor(context,R.color.blue_500)
+    val colorPurple = ContextCompat.getColor(context,R.color.purple_200)
+    val colorBlack = ContextCompat.getColor(context,R.color.black)
+    swipe.setColorSchemeColors(colorGold, colorBlue,colorBlack, colorPurple)
 }

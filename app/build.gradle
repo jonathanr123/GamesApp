@@ -16,6 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -41,9 +42,10 @@ dependencies {
     def nav_version = "2.5.1"
     def hilt_version = "2.43.1"
     def paging_version = "3.1.1"
+    def room_version = "2.4.3"
 
     implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     // Material Design
     implementation 'com.google.android.material:material:1.6.1'
     // Constraint Layout
@@ -55,7 +57,7 @@ dependencies {
     // Activity
     implementation("androidx.activity:activity-ktx:1.5.1")
     // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.5.1")
+    implementation("androidx.fragment:fragment-ktx:1.5.2")
     // Recycler View
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     // Coil
@@ -90,6 +92,16 @@ dependencies {
     kaptTest "com.google.dagger:hilt-compiler:$hilt_version"
     // Circle Image View
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    // Room Database
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // ExoPlayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
+    // DataStore
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

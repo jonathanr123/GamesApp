@@ -7,25 +7,31 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.gamesapp.view.HomeFragment"
+        android:name="com.example.gamesapp.ui.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.gamesapp.view.SearchFragment"
+        android:name="com.example.gamesapp.ui.view.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
+        android:id="@+id/videosFragment"
+        android:name="com.example.gamesapp.ui.view.VideosFragment"
+        android:label="fragment_videos"
+        tools:layout="@layout/fragment_videos" />
+
+    <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.gamesapp.view.FavoritesFragment"
+        android:name="com.example.gamesapp.ui.view.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/GameDetailFragment"
-        android:name="com.example.gamesapp.view.GameDetailFragment"
+        android:name="com.example.gamesapp.ui.view.GameDetailFragment"
         android:label="fragment_game_detail"
         tools:layout="@layout/fragment_game_detail" />
 
