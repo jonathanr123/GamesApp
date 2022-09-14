@@ -13,12 +13,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.data.model.Games
 import com.example.gamesapp.data.model.ShortScreenshot
-import com.example.gamesapp.ui.view.GameDetailFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 fun View.visible(): View {
@@ -78,10 +78,8 @@ fun showModalBottomSheetGames(games: Games, context: Context, parentFragmentMana
     modal?.setOnClickListener {
         dialog.dismiss()
         // Navigate to Game Detail Fragment with object games
-        parentFragmentManager?.setFragmentResult("game_detail", bundleOf("game" to games))
-        parentFragmentManager?.beginTransaction()
-            ?.replace(R.id.fragmentContainerView, GameDetailFragment())?.addToBackStack(null)
-            ?.commit()
+        val navController = parentFragmentManager?.findFragmentById(R.id.nav_host_fragment)?.findNavController()
+        navController?.navigate(R.id.GameDetailFragment, bundleOf("game" to games))
     }
     val image = dialog.findViewById<ImageView>(R.id.iv_image_modal)
     image?.load(games.imageURL)

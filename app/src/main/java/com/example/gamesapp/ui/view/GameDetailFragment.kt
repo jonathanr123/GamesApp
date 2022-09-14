@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -54,10 +53,8 @@ class GameDetailFragment : Fragment() {
         activity.findViewById<Toolbar>(R.id.toolbar).setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.black))
 
         // Received game from previous fragment and set it to view model
-        setFragmentResultListener("game_detail") { _, bundle ->
-            gameReceived = bundle.getSerializable("game") as Games?
-            gameDetailViewModel.setGameSelected(gameReceived)
-        }
+        gameReceived = arguments?.getSerializable("game") as Games?
+        gameDetailViewModel.setGameSelected(gameReceived)
 
         // Set views with data from view model
         gameDetailViewModel.gameSelected.observe(viewLifecycleOwner){ response ->

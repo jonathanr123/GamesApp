@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,6 @@ import coil.load
 import com.example.gamesapp.R
 import com.example.gamesapp.databinding.ItemSearchListBinding
 import com.example.gamesapp.data.model.Games
-import com.example.gamesapp.ui.view.GameDetailFragment
 
 class SearchListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilCallback()) {
 
@@ -48,10 +48,8 @@ class SearchListAdapter : ListAdapter<Games, RecyclerView.ViewHolder> (DiffUtilC
 
                 cvGameSearch.setOnClickListener {
                     // Navigate to Game Detail Fragment with object games
-                    manager?.setFragmentResult("game_detail", bundleOf("game" to value))
-                    manager?.beginTransaction()
-                        ?.replace(R.id.fragmentContainerView, GameDetailFragment())?.addToBackStack(null)
-                        ?.commit()
+                    val navController = manager?.findFragmentById(R.id.nav_host_fragment)?.findNavController()
+                    navController?.navigate(R.id.GameDetailFragment, bundleOf("game" to value))
                 }
             }
         }
